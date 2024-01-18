@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello Chirag !!"
+        android:layout_alignParentEnd="true"
+        android:textSize="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp">
+
+    </TextView>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/balanceCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="100dp"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="50"
+            android:textSize="20dp"
+            android:layout_centerInParent="true">
+
+        </TextView>
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:layout_width="190dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/balanceCard"
+        android:layout_marginTop="50dp"
+
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            xmlns:android="http://schemas.android.com/apk/res/android">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="50"
+                android:textSize="20dp"
+                android:layout_centerInParent="true">
+
+            </TextView>
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/expenseCard"
+        android:layout_width="190dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/balanceCard"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="50dp"
+
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            xmlns:android="http://schemas.android.com/apk/res/android">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="50"
+                android:textSize="20dp"
+                android:layout_centerInParent="true">
+
+            </TextView>
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+    <ImageView
+        android:layout_below="@+id/expenseCard"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/circle_addexp"
+        android:layout_marginVertical="250dp"
+        android:layout_marginHorizontal="10dp"
+        >
+
+    </ImageView>
+
+</RelativeLayout>
