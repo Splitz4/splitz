@@ -44,7 +44,7 @@ class addFriends : Fragment() {
     }
 
     private fun navigateButton() {
-        val intent = Intent(activity(), contactList::class.java)
+        val intent = Intent(activity, contactList::class.java)
         startActivity(intent)
     }
 
