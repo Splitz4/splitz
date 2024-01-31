@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    android:layout_width="match_parent"
+<RelativeLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
         android:layout_width="wrap_content"
@@ -27,11 +27,21 @@
             android:layout_height="100dp"
             xmlns:android="http://schemas.android.com/apk/res/android">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total Balance"
+                android:textSize="15dp"
+                android:layout_above="@+id/balanceAmount"
+                android:layout_centerHorizontal="true"
+                >
+            </TextView>
         <TextView
+            android:id="@+id/balanceAmount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="50"
-            android:textSize="20dp"
+            android:textSize="25dp"
             android:layout_centerInParent="true">
 
         </TextView>
@@ -41,15 +51,29 @@
         android:layout_width="190dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/balanceCard"
-        android:layout_marginTop="50dp"
-
-        >
+        android:layout_marginTop="50dp">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="100dp"
             xmlns:android="http://schemas.android.com/apk/res/android">
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/income_arrow"
+                android:layout_alignParentEnd="true">
+            </ImageView>
+
             <TextView
+                android:layout_above="@+id/Income"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Income"
+                android:textSize="15dp"
+                android:layout_centerHorizontal="true">
+            </TextView>
+            <TextView
+                android:id="@+id/Income"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="50"
@@ -73,7 +97,22 @@
             android:layout_height="100dp"
             xmlns:android="http://schemas.android.com/apk/res/android">
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/expense_arrow"
+                android:layout_alignParentEnd="true">
+            </ImageView>
             <TextView
+                android:layout_above="@+id/Expense"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Expense"
+                android:textSize="15dp"
+                android:layout_centerHorizontal="true">
+            </TextView>
+            <TextView
+                android:id="@+id/Expense"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="50"
@@ -83,16 +122,54 @@
             </TextView>
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
-    <ImageView
-        android:layout_below="@+id/expenseCard"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_alignParentEnd="true"
-        android:src="@drawable/circle_addexp"
-        android:layout_marginVertical="250dp"
-        android:layout_marginHorizontal="10dp"
-        >
 
-    </ImageView>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/add_btn"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/circle_addexp"
+         />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/add_btn1"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_above="@id/add_btn"
+        android:visibility="gone"
+        android:backgroundTint="#8EFF42"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/income_arrow"
+         />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/add_btn2"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_above="@+id/add_btn1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:backgroundTint="#FF4444"
+        android:visibility="gone"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/expense_arrow"
+        />
 
 </RelativeLayout>
