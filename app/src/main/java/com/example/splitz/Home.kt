@@ -19,6 +19,7 @@ class Home : AppCompatActivity() {
         binding.bottomNavBar.setOnItemSelectedListener {
             when(it.itemId){
                 R.id.home-> replaceFragments(home_Freg())
+                R.id.group-> replaceFragments(freg_Group())
                 R.id.friends-> replaceFragments(addFriends())
                 R.id.setting-> replaceFragments(setting_Freg())
 

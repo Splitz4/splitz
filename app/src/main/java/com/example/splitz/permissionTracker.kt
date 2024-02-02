@@ -11,4 +11,5 @@ object permissionTracker {
             android.Manifest.permission.READ_CONTACTS,
             android.Manifest.permission.WRITE_CONTACTS,
         )
+
 }
