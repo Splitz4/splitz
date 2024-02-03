@@ -1,10 +1,15 @@
 package com.example.splitz
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -34,8 +39,35 @@ class home_Freg : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home__freg, container, false)
+        val view = inflater.inflate(R.layout.fragment_home__freg, container, false)
+        val addExpbtn = view.findViewById<Button>(R.id.bHTE)
+        addExpbtn.setOnClickListener{
+            showPopupForm()
+        }
+        return view
     }
+    private fun showPopupForm() {
+        val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.create_expense, null)
+
+        val alertDialogBuilder = AlertDialog.Builder(requireContext())
+            .setView(dialogView)
+            .setTitle("Expense Form")
+
+        val alertDialog = alertDialogBuilder.create()
+
+
+        val submitButton = dialogView.findViewById<Button>(R.id.saveExp)
+        submitButton.setOnClickListener {
+          val intent = Intent(activity, addExpense::class.java)
+            startActivity(intent)
+
+          alertDialog.dismiss()
+        }
+
+        // Show the dialog
+        alertDialog.show()
+    }
+
 
     companion object {
         /**

@@ -1,11 +1,16 @@
 package com.example.splitz
 
+import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.widget.Button
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class addExpense : AppCompatActivity() {
@@ -30,13 +35,14 @@ class addExpense : AppCompatActivity() {
             onFabButtonClicked()
         }
         add_btn1.setOnClickListener{
-            Toast.makeText(this,"This is Working2", Toast.LENGTH_LONG).show()
+            showPopupFormExp(this)
         }
         add_btn2.setOnClickListener{
-               Toast.makeText(this,"This is Working2", Toast.LENGTH_LONG).show()
+               showPopupFormIncome(this)
         }
 
     }
+
     private fun onFabButtonClicked(){
         setVisibility(clicked)
         setAnimation(clicked)
@@ -74,5 +80,44 @@ class addExpense : AppCompatActivity() {
             add_btn2.isClickable = false
         }
     }
+    private fun showPopupFormExp(context: Context) {
+        val dialogView = LayoutInflater.from(context).inflate(R.layout.create_expense, null)
 
+        val alertDialogBuilder = AlertDialog.Builder(context)
+            .setView(dialogView)
+            .setTitle("Expense Form")
+
+        val alertDialog = alertDialogBuilder.create()
+
+       //  Handle form elements and buttons
+        val submitButton = dialogView.findViewById<Button>(R.id.saveExp)
+        submitButton.setOnClickListener {
+
+          alertDialog.dismiss()
+        }
+
+
+        alertDialog.show()
+    }
+    private fun showPopupFormIncome(context: Context) {
+        val dialogView = LayoutInflater.from(context).inflate(R.layout.create_income, null)
+
+        val alertDialogBuilder = AlertDialog.Builder(context)
+            .setView(dialogView)
+            .setTitle("Income Form")
+
+        val alertDialog = alertDialogBuilder.create()
+
+        // Handle form elements and buttons
+        //val submitButton = dialogView.findViewById<Button>(R.id.submitButton)
+        //submitButton.setOnClickListener {
+        // Handle form submission
+        // ...
+
+        //  alertDialog.dismiss()
+        //}
+
+        // Show the dialog
+        alertDialog.show()
+    }
 }
