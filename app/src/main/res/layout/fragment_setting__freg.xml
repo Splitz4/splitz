@@ -8,19 +8,96 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    <!-- TODO: Update blank fragment layout -->
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/navigation_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        app:menu="@menu/nav_side"
-        android:layout_gravity="start"
-        android:fitsSystemWindows="true"
+        android:layout_height="match_parent"
+        android:layout_margin="20dp"
         >
 
-    </com.google.android.material.navigation.NavigationView>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            >
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/darkModeSwitch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Dark Mode"
+                    style="@style/settingsText"
+                    android:drawableLeft="@drawable/ic_dark_mode"
+                    >
+
+                </androidx.appcompat.widget.SwitchCompat>
+                <TextView
+                    android:id="@+id/profileText"
+                    style="@style/viewParent.headerText.settingsMiniTitle"
+                    android:text="Profile"
+                    android:layout_below="@+id/darkModeSwitch"
+                    />
+
+                <TextView
+                    android:id="@id/buttonEditProfile"
+                    style="@style/viewParent.headerText.settingsTextIcon"
+                    android:drawableLeft="@drawable/ic_edit_profile"
+                    android:text="Edit Profile"
+                    android:layout_below="@+id/profileText"
+
+                    />
+                <TextView
+                    android:id="@+id/notificationText"
+                    style="@style/viewParent.headerText.settingsMiniTitle"
+                    android:text="Notifications"
+                    android:layout_below="@+id/buttonEditProfile"
+                    />
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/notificationSwitch"
+                    style="@style/settingsText"
+                    android:checked="true"
+                    android:drawableLeft="@drawable/ic_notifications"
+                    android:text="Notifications"
+                    android:layout_below="@+id/notificationText"
+                    />
+
+                <TextView
+                    android:id="@+id/regionalText"
+                    style="@style/viewParent.headerText.settingsMiniTitle"
+                    android:text="Regional"
+                    android:layout_below="@id/notificationSwitch"
+                    />
+
+                <TextView
+                    android:id="@+id/buttonReg"
+                    style="@style/viewParent.headerText.settingsTextIcon"
+                    android:drawableLeft="@drawable/ic_languages"
+                    android:text="Language"
+                    android:layout_below="@id/regionalText"
+                    />
+
+                <TextView
+                    style="@style/viewParent.headerText.settingsTextIcon"
+                    android:drawableLeft="@drawable/ic_logout"
+                    android:text="Logout"
+                    android:layout_below="@+id/buttonReg"
+                    />
+
+
+            </RelativeLayout>
+
+        </ScrollView>
+        <!--    &lt;!&ndash; TODO: Update blank fragment layout &ndash;&gt;-->
+<!--    <com.google.android.material.navigation.NavigationView-->
+<!--        android:id="@+id/navigation_view"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignParentEnd="true"-->
+<!--        app:menu="@menu/nav_side"-->
+<!--        android:layout_gravity="start"-->
+<!--        android:fitsSystemWindows="true"-->
+<!--        >-->
+
+<!--    </com.google.android.material.navigation.NavigationView>-->
     </RelativeLayout>
 </FrameLayout>

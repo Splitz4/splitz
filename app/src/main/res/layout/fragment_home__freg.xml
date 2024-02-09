@@ -13,26 +13,24 @@
         android:id="@+id/dashboardHome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="DashBoard"
+        android:text="@string/hello_blank_fragment"
         android:textSize="25dp"
-        android:textColor="#000"
         android:layout_margin="15px"/>
     <TextView
         android:id="@+id/settleUpText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="You’re all settled\nup. Awesome!"
+        android:text="@string/welcomeSlog"
         android:textSize="40dp"
         android:layout_above="@id/addExpText"
         android:layout_marginBottom="30dp"
         android:textAlignment="center"
-        android:textColor="#000"
         />
     <TextView
         android:id="@+id/addExpText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="To add a new expense, click the orange “Add an expense” button."
+        android:text="@string/newExpSlog"
         android:textSize="25dp"
         android:layout_above="@id/bHTE"
         android:layout_marginBottom="30dp"
@@ -44,7 +42,7 @@
         android:id="@+id/bHTE"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add an expense"
+        android:text="@string/addExpButto"
         android:layout_centerInParent="true"/>
 
     </RelativeLayout>

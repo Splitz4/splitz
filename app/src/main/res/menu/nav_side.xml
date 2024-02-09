@@ -15,6 +15,10 @@
         android:title="Logout"
         android:icon="@drawable/logout"/>
     <item
+        android:id="@+id/lightModer"
+        android:title="Dark Mode"
+        android:icon="@drawable/logout"/>
+    <item
         android:id="@+id/registered"
         android:title="Registered" >
         <menu>

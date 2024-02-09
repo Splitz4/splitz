@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello_blank_fragment">डैशबोर्ड</string>
+    <string name="welcomeSlog">आप सब ठीक हो गए\n बहुत बढ़िया!</string>
+    <string name="newExpSlog">नया व्यय जोड़ने के लिए, नारंगी "व्यय जोड़ें" बटन पर क्लिक करें.</string>
+    <string name="addExpButto">एक व्यय जोड़ें</string>
+    <string name="e_mail">Email</string>
+    <string name="password">Password</string>
+    <string name="tag">Let\'s join us and \nBuild your relationship with others</string>
+    <string name="login">Login</string>
+    <string name="swipe_right_for_login">Swipe Right for Login</string>
+</resources>

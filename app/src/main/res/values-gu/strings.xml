@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello_blank_fragment" translatable="false">ડેશબોર્ડ</string>
+    <string name="welcomeSlog" translatable="false">તમે બધા સ્થાયી થયા છો\n. અદ્ભુત!</string>
+    <string name="newExpSlog" translatable="false">નવો ખર્ચ ઉમેરવા માટે, નારંગી "ખર્ચ ઉમેરો" બટનને ક્લિક કરો.</string>
+    <string name="addExpButto" translatable="false">ખર્ચ ઉમેરો</string>
+    <string name="e_mail">Email</string>
+    <string name="password">Password</string>
+    <string name="tag">Let\'s join us and \nBuild your relationship with others</string>
+    <string name="login">Login</string>
+    <string name="swipe_right_for_login">Swipe Right for Login</string>
+</resources>

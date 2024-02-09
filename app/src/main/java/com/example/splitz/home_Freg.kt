@@ -2,6 +2,7 @@ package com.example.splitz
 
 import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatDelegate
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -58,15 +60,16 @@ class home_Freg : Fragment() {
 
         val submitButton = dialogView.findViewById<Button>(R.id.saveExp)
         submitButton.setOnClickListener {
-          val intent = Intent(activity, addExpense::class.java)
+            val intent = Intent(activity, addExpense::class.java)
             startActivity(intent)
 
-          alertDialog.dismiss()
+            alertDialog.dismiss()
         }
 
         // Show the dialog
         alertDialog.show()
     }
+
 
 
     companion object {

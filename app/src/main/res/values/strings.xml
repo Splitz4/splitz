@@ -1,5 +1,13 @@
 <resources>
-    <string name="app_name">Splitz</string>
+    <!--    <string name="app_name">Splitz</string>-->
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment">Dashboard</string>
+    <string name="welcomeSlog">You’re all settled\nup. Awesome!</string>
+    <string name="newExpSlog">To add a new expense, click the orange “Add an expense” button.</string>
+    <string name="addExpButto">Add an expense</string>
+    <string name="e_mail">Email</string>
+    <string name="password">Password</string>
+    <string name="tag">Let\'s join us and \nBuild your relationship with others</string>
+    <string name="login">Login</string>
+    <string name="swipe_right_for_login">Swipe Right for Login</string>
 </resources>
