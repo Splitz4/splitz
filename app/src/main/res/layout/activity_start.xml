@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".start_act">
+
+    <view class="android.widget.ImageView"
+        android:layout_width="match_parent"
+        android:layout_height="305dp"
+        android:background="#CD53F1"
+        >
+
+    </view>
+
+    <ImageView
+        android:id="@+id/startScreenImg"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:src="@drawable/mainscreen"
+        android:layout_marginTop="250dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Splitz App"
+        android:textSize="60dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:textColor="@color/cardview_light_background"
+        android:textStyle="bold"
+        >
+    </TextView>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/loginButtonCard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="10dp"
+        android:layout_below="@+id/startScreenImg"
+        android:layout_centerHorizontal="true"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Log in"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:textColor="@color/cardview_light_background"
+            android:background="#CC53F0"
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+
+            >
+
+        </TextView>
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/registerButtonCard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="10dp"
+        android:layout_below="@+id/loginButtonCard"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Register"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+
+
+            >
+
+        </TextView>
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

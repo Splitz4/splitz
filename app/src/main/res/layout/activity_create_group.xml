@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    android:layout_height="match_parent"
+<RelativeLayout android:layout_height="match_parent"
     android:layout_width="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
         android:id="@+id/cancel_button_Profile"
@@ -53,6 +52,7 @@
         android:layout_marginBottom="10dp"
         />
     <com.google.android.material.textfield.TextInputLayout
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textGroup"
@@ -60,6 +60,7 @@
         android:inputType="text"
         >
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/groupName"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_below="@+id/textGroup"
@@ -71,6 +72,27 @@
 
         </com.google.android.material.textfield.TextInputEditText>
     </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/contactCardList"
+        android:layout_width="match_parent"
+        android:layout_height="300sp"
+        android:layout_alignParentBottom="true"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcvContact"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+             />
+        </RelativeLayout>
+
+    </com.google.android.material.card.MaterialCardView>
 
 
 </RelativeLayout>

@@ -8,5 +8,6 @@
     <color name="colorAccentLight">#FF4081</color>
     <color name="miniTitle">#2A2E43</color>
     <color name="contentTextColor">#020000</color>
+    <color name="cardTransparent">#30000000</color>
 </resources>
 

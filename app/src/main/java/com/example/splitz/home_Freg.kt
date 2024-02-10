@@ -1,17 +1,17 @@
 package com.example.splitz
 
-import android.content.Context
 import android.content.Intent
-import android.content.res.Configuration
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatDelegate
+import androidx.cardview.widget.CardView
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -42,7 +42,8 @@ class home_Freg : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_home__freg, container, false)
-        val addExpbtn = view.findViewById<Button>(R.id.bHTE)
+        val addExpbtn = view.findViewById<CardView>(R.id.cardSendIcon)
+
         addExpbtn.setOnClickListener{
             showPopupForm()
         }

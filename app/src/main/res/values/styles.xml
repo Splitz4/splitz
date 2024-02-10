@@ -41,4 +41,21 @@
     <style name="viewParent.headerText.settingsTextIcon" parent="settingsText">
         <item name="android:drawableRight">@drawable/ic_more</item>
     </style>
+    <style name="card_home">
+        <item name="android:bottomRightRadius" >55dp</item>
+        <item name="backgroundColor">#000</item>
+    </style>
+    <style name="description_Pop" parent="viewParent.headerText.settingsMiniTitle">
+        <item name="android:textColor">@color/miniTitle</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:drawablePadding">20dp</item>
+    </style>
+    <style name="contactList" parent="viewParent.headerText.settingsMiniTitle">
+        <item name="android:textColor">@color/miniTitle</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:drawablePadding">20dp</item>
+
+    </style>
 </resources>

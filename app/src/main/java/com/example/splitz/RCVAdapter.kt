@@ -11,8 +11,8 @@ class RCVAdapter (
     val contactL:ArrayList<ContactModel>
         ):RecyclerView.Adapter<RCVAdapter.MyViewHolder>(){
           inner class MyViewHolder(val binding: ContactChildBinding) : RecyclerView.ViewHolder(binding.root){
-              val nameTV = binding.nameTV
-              val numberTV = binding.numberTV
+              val nameTV = binding.nameContact
+              val numberTV = binding.numberContact
           }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RCVAdapter.MyViewHolder {
@@ -21,8 +21,8 @@ class RCVAdapter (
 
     override fun onBindViewHolder(holder: RCVAdapter.MyViewHolder, position: Int) {
         val item = contactL[position]
-        holder.binding.nameTV.text = item.displayName
-        holder.binding.numberTV.text = item.number
+        holder.binding.nameContact.text = item.displayName
+        holder.binding.numberContact.text = item.number
     }
 
     override fun getItemCount(): Int = contactL.size

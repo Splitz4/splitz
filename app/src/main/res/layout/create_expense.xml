@@ -1,22 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- res/layout/popup_form.xml -->
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
 
    <com.google.android.material.textfield.TextInputLayout
        android:id="@+id/expenseDescription"
+
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
        android:hint="Description"
        android:padding="20dp"
        >
        <com.google.android.material.textfield.TextInputEditText
+           style="@style/description_Pop"
            android:layout_width="match_parent"
            android:layout_height="match_parent"
+           android:drawableLeft="@drawable/description"
            android:padding="20dp">
 
        </com.google.android.material.textfield.TextInputEditText>
@@ -36,6 +38,8 @@
             android:layout_height="match_parent"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
+            style="@style/description_Pop"
+            android:drawableLeft="@drawable/amount"
             android:layout_below="@+id/expenseDescription"
             >
 

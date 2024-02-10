@@ -3,47 +3,162 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".home_Freg">
+
+    <view
+        class="android.widget.ImageView"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="#CD4EF1">
+
+    </view>
+
+    <ImageView
+        android:id="@+id/background_Color"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_marginTop="150dp"
+        android:scaleType="center"
+        android:src="@drawable/wave" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/dashboardHome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_blank_fragment"
-        android:textSize="25dp"
-        android:layout_margin="15px"/>
-    <TextView
-        android:id="@+id/settleUpText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/welcomeSlog"
-        android:textSize="40dp"
-        android:layout_above="@id/addExpText"
-        android:layout_marginBottom="30dp"
-        android:textAlignment="center"
-        />
-    <TextView
-        android:id="@+id/addExpText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/newExpSlog"
-        android:textSize="25dp"
-        android:layout_above="@id/bHTE"
-        android:layout_marginBottom="30dp"
-        android:textAlignment="center"
-        />
+        <TextView
+            android:id="@+id/dashboardHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="15dp"
+            android:text="@string/hello_blank_fragment"
+            android:textStyle="bold"
+            android:textColor="@color/cardview_light_background"
+            android:textSize="25dp" />
 
-    <!--    bhte->button from home to expense-->
-    <Button
-        android:id="@+id/bHTE"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/addExpButto"
-        android:layout_centerInParent="true"/>
+        <TextView
+            android:id="@+id/settleUpText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/dashboardHome"
+            android:layout_marginLeft="20dp"
+            android:textStyle="bold"
+            android:layout_marginTop="25dp"
+            android:text="@string/welcomeSlog"
+            android:textColor="@color/cardview_light_background"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/addExpText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/settleUpText"
+            android:layout_marginLeft="20dp"
+            android:text="@string/newExpSlog"
+            android:textColor="@color/cardview_light_background"
+            android:textSize="30dp" />
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardSendIcon"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_below="@+id/addExpText"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="40dp"
+            app:cardBackgroundColor="@color/cardTransparent"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="4dp"
+
+            >
+<!--            app:cardBackgroundColor="@color/cardTransparent"-->
+<!--            app:cardCornerRadius="10dp"-->
+<!--            app:cardElevation="4dp"-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/arrow_upside">
+
+                </ImageView>
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/cardSendIcon"
+            android:layout_marginStart="25dp"
+            android:text="Income"
+            android:textColor="@color/cardview_light_background"
+            android:textSize="20sp" />
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardReqIcon"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_below="@+id/addExpText"
+            android:layout_marginStart="140dp"
+            android:layout_marginTop="40dp"
+            app:cardBackgroundColor="@color/cardTransparent"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="4dp"
+            >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/arrow_downside"
+                    >
+
+                </ImageView>
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/cardReqIcon"
+            android:layout_marginStart="145dp"
+            android:text="Expense"
+            android:textColor="@color/cardview_light_background"
+            android:textSize="20sp" />
+        <TextView
+            android:id="@+id/expenseList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/cardSendIcon"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="150dp"
+            android:text="Expenses"
+            android:textStyle="bold"
+            android:textSize="20dp" />
+
+        <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_below="@+id/expenseList"
+            >
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+
 
     </RelativeLayout>
 </FrameLayout>
