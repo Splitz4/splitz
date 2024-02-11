@@ -1,8 +1,10 @@
 package com.example.splitz
 
 import android.app.Activity
+
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
+import android.content.Intent
 import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.os.Bundle
@@ -15,12 +17,14 @@ import android.widget.Button
 import android.widget.Switch
 import android.widget.TextView
 import android.widget.Toast
+import android.window.SplashScreen
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SwitchCompat
 import androidx.core.app.ActivityCompat.recreate
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.auth.FirebaseAuth
 import java.util.Locale
 
 // TODO: Rename parameter arguments, choose names that match
@@ -55,14 +59,27 @@ class setting_Freg : Fragment(){
         return inflater.inflate(R.layout.fragment_setting__freg, container, false)
     }
 
+    private lateinit var auth: FirebaseAuth
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         loadLocate()
 
         // Check the current theme and set the switch state accordingly
         val buttonReg = view.findViewById<TextView>(R.id.buttonReg)
+        val logoutApp = view.findViewById<TextView>(R.id.logoutApp)
         val darkModeSwitch = view.findViewById<SwitchCompat>(R.id.darkModeSwitch)
             darkModeSwitch.isChecked = AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES
+
+        val auth = FirebaseAuth.getInstance()
+        logoutApp.setOnClickListener {
+            auth.signOut()
+
+            saveLoggedInStatus(isLoggedIn = false)
+            val intent = Intent(activity, splashScreen::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+            activity?.finish()
+        }
 
 
         darkModeSwitch.setOnCheckedChangeListener { _, isChecked ->
@@ -118,6 +135,21 @@ class setting_Freg : Fragment(){
         val sharedPreferences = requireActivity().getSharedPreferences("Settings",Activity.MODE_PRIVATE)
         val language = sharedPreferences.getString("My_Lang", "")?:""
         setLocate(language)
+    }
+
+    private fun saveLoggedInStatus(isLoggedIn: Boolean) {
+        // Retrieve the shared preferences
+        val prefs = requireActivity().getSharedPreferences(login.PREFS_NAME, Context.MODE_PRIVATE)
+
+
+        // Get the shared preferences editor
+        val editor = prefs.edit()
+
+        // Store the value of isLoggedIn in shared preferences
+        editor.putBoolean(login.KEY_IS_LOGGED_IN, isLoggedIn)
+
+        // Apply the changes
+        editor.apply()
     }
 
 

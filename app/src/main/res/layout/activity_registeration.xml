@@ -58,7 +58,7 @@
         android:textSize="15sp" />
 
     <EditText
-        android:id="@+id/et_password"
+        android:id="@+id/etoPassword"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginLeft="20dp"
@@ -71,7 +71,7 @@
         android:textSize="15sp" />
 
     <EditText
-        android:id="@+id/et_repassword"
+        android:id="@+id/etRepassword"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginLeft="20dp"
@@ -85,7 +85,9 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        tools:context=".registeration"
+        >
 
         <Button
             android:id="@+id/btn_register"

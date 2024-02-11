@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="#092635"
     android:orientation="vertical"
-    tools:context=".Login">
+    tools:context=".login">
 
 
     <!--        android:fontFamily="@font/cherry_swash_bold"-->
@@ -24,7 +24,7 @@
         android:id="@+id/tv_subtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@id/et_email"
+        android:layout_above="@id/etl_email"
         android:layout_marginStart="25dp"
         android:layout_marginBottom="61dp"
         android:text="@string/tag"
@@ -32,10 +32,10 @@
         android:textSize="20sp" />
 
     <EditText
-        android:id="@+id/et_email"
+        android:id="@+id/etl_email"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_above="@id/et_password"
+        android:layout_above="@id/etl_password"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:background="@drawable/et_custom"
@@ -45,7 +45,7 @@
         android:textSize="15sp" />
 
     <EditText
-        android:id="@+id/et_password"
+        android:id="@+id/etl_password"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_centerInParent="true"
@@ -62,7 +62,7 @@
         android:id="@+id/txt_forgotPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/et_password"
+        android:layout_below="@+id/etl_password"
         android:layout_alignParentRight="true"
         android:layout_marginTop="10dp"
         android:layout_marginRight="20dp"

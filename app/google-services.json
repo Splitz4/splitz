@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "792247344918",
+    "project_id": "splitz-575ac",
+    "storage_bucket": "splitz-575ac.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:792247344918:android:1d5aa442c386b8341afa37",
+        "android_client_info": {
+          "package_name": "com.example.splitz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "792247344918-offbtf170fk8ih5fq7nos41nqd4rjjvu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.splitz",
+            "certificate_hash": "e0fd9bda975bec0373cbf731cdaa3d10977d0036"
+          }
+        },
+        {
+          "client_id": "792247344918-8l66na09ij8b9ma6i5kqodeosjk1an69.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDSJI02YMgJkMq7WM-a4dCHAZx-F8oUIp0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "792247344918-8l66na09ij8b9ma6i5kqodeosjk1an69.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
