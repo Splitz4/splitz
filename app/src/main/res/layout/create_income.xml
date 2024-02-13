@@ -15,6 +15,7 @@
         android:padding="20dp"
         >
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/incomeDescEdit"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="20dp">
@@ -32,6 +33,7 @@
 
         >
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/incomeAmoutEdit"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingLeft="20dp"
@@ -42,7 +44,7 @@
         </com.google.android.material.textfield.TextInputEditText>
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/saveExp"
+        android:id="@+id/saveIncome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/expenseAmount"

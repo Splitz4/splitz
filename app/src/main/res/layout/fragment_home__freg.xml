@@ -30,14 +30,14 @@
             android:id="@+id/dashboardHome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="30dp"
             android:layout_marginEnd="15dp"
             android:layout_marginBottom="15dp"
+            android:layout_centerHorizontal="true"
             android:text="@string/hello_blank_fragment"
             android:textStyle="bold"
             android:textColor="@color/cardview_light_background"
-            android:textSize="25dp" />
+            android:textSize="30sp" />
 
         <TextView
             android:id="@+id/settleUpText"
@@ -57,7 +57,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/settleUpText"
             android:layout_marginLeft="20dp"
-            android:text="@string/newExpSlog"
+            android:text=""
             android:textColor="@color/cardview_light_background"
             android:textSize="30dp" />
         <androidx.cardview.widget.CardView
@@ -90,19 +90,22 @@
         </androidx.cardview.widget.CardView>
 
         <TextView
+            android:id="@+id/eexpText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/cardSendIcon"
             android:layout_marginStart="25dp"
-            android:text="Income"
+            android:text="Expense"
             android:textColor="@color/cardview_light_background"
             android:textSize="20sp" />
+
         <androidx.cardview.widget.CardView
             android:id="@+id/cardReqIcon"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_below="@+id/addExpText"
-            android:layout_marginStart="140dp"
+            android:layout_alignStart="@+id/cardSendIcon"
+            android:layout_marginStart="100dp"
             android:layout_marginTop="40dp"
             app:cardBackgroundColor="@color/cardTransparent"
             app:cardCornerRadius="10dp"
@@ -124,11 +127,50 @@
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
         <TextView
+            android:id="@+id/iincomeText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/cardReqIcon"
-            android:layout_marginStart="145dp"
-            android:text="Expense"
+            android:layout_alignLeft="@id/eexpText"
+            android:layout_marginStart="100dp"
+            android:text="Income"
+            android:textColor="@color/cardview_light_background"
+            android:textSize="20sp" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/splitzIcon"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_below="@+id/addExpText"
+            android:layout_alignStart="@+id/cardReqIcon"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="40dp"
+            app:cardBackgroundColor="@color/cardTransparent"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="4dp"
+            >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/baseline_call_split_24"
+                    >
+
+                </ImageView>
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/cardReqIcon"
+            android:layout_alignLeft="@id/iincomeText"
+            android:layout_marginStart="115dp"
+            android:text="Split"
             android:textColor="@color/cardview_light_background"
             android:textSize="20sp" />
         <TextView
@@ -137,24 +179,29 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/cardSendIcon"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="150dp"
+            android:layout_marginTop="120dp"
             android:text="Expenses"
             android:textStyle="bold"
             android:textSize="20dp" />
+
 
         <LinearLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:layout_below="@+id/expenseList"
             >
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_view"
+                android:id="@+id/recycler_viewTransactions"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="match_parent"
+                tools:listitem="@layout/transactions_view"
+                android:orientation="horizontal"
+                />
+
 
         </LinearLayout>
 

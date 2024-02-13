@@ -15,6 +15,16 @@
     </view>
 
     <ImageView
+        android:id="@+id/iconLogo"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/logo2"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        >
+
+    </ImageView>
+    <ImageView
         android:id="@+id/startScreenImg"
         android:layout_width="match_parent"
         android:layout_height="200dp"
@@ -22,12 +32,12 @@
         android:layout_marginTop="250dp"
         />
     <TextView
+        android:layout_below="@+id/iconLogo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Splitz App"
-        android:textSize="60dp"
+        android:textSize="40dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"
         android:textColor="@color/cardview_light_background"
         android:textStyle="bold"
         >

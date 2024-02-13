@@ -119,10 +119,10 @@ class login : AppCompatActivity() {
                                     for (document in documents) {
                                         if (document.get("Email") == etEmail) {
                                             saveLoggedInStatus(true)
-//                                            val username = document.getString("Name")
-//                                            if (username != null) {
-//                                                saveUsername(username)
-//                                            }
+                                            val username = document.getString("Name")
+                                            if (username != null) {
+                                                saveUsername(username)
+                                            }
 
                                             val intent = Intent(this, Home::class.java)
                                             //val Name = intent.putExtra("username", "$username")
@@ -168,7 +168,10 @@ class login : AppCompatActivity() {
         if(task.isSuccessful){
 
             val account : GoogleSignInAccount?= task.result
+            val user = account?.displayName
+            val username = user.toString()
             if(account!=null){
+                saveUsername(username)
                 updateUI(account)
             }
         }else{
