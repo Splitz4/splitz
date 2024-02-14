@@ -25,7 +25,7 @@ class contactList : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
     private lateinit var binding : ActivityContactListBinding
 
     var arrayList:ArrayList<ContactModel> = arrayListOf()
-    var rcvAdapter:RCVAdapter = RCVAdapter(arrayList)
+    var rcvAdapter:RCVAdapter = RCVAdapter(this,arrayList)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +37,7 @@ class contactList : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
             binding.apply {
                 rcvContact.apply {
                     layoutManager = LinearLayoutManager(this@contactList)
-                    adapter = RCVAdapter(arrayList)
+                    adapter = RCVAdapter(context,arrayList)
 
                 }
             }
@@ -61,7 +61,8 @@ class contactList : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
         while (cursor!!.moveToNext()){
             val contactName = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME))
             val contactNumber = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))
-            val contactModel =  ContactModel(contactName,contactNumber)
+
+            val contactModel = ContactModel(contactName, contactNumber)
             arrayList.add(contactModel)
         }
         rcvAdapter.notifyDataSetChanged()

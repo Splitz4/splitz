@@ -18,6 +18,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -67,10 +69,7 @@ class home_Freg : Fragment() {
         val splitzBtn = view.findViewById<CardView>(R.id.splitzIcon)
         val totalBalance = view.findViewById<TextView>(R.id.addExpText)
 
-            splitzBtn.setOnClickListener {
-                val intent = Intent(activity, addFriends::class.java)
-                startActivity(intent)
-            }
+
 
 
 
@@ -78,19 +77,13 @@ class home_Freg : Fragment() {
 
         userRecyclerView = view.findViewById(R.id.recycler_viewTransactions)
         //userRecyclerView.LayoutManager = LinearLayoutManager(this)
-        userRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        userRecyclerView.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         userRecyclerView.setHasFixedSize(true)
 
         transactionList = arrayListOf<transactionsData>()
 
         getTransactionData()
-
-
-
-
-
-
-
 
 
         val savedUsername = getUsername()
@@ -106,7 +99,8 @@ class home_Freg : Fragment() {
                     var totalExpenses = 0.0
 
                     for (document in documents) {
-                        val incomeAmount = document.getString("IncomeAmount")?.toDoubleOrNull() ?: 0.0
+                        val incomeAmount =
+                            document.getString("IncomeAmount")?.toDoubleOrNull() ?: 0.0
                         val expenseAmount = document.getString("ExpAmount")?.toDoubleOrNull() ?: 0.0
 
                         totalIncome += incomeAmount
@@ -132,16 +126,32 @@ class home_Freg : Fragment() {
 
         addExpbtn.setOnClickListener {
 
-        showPopupForm()
+            showPopupForm()
         }
         incomeBtn.setOnClickListener {
             showPopupForm1()
         }
-        return view
-    }
+        splitzBtn.setOnClickListener {
+//            val intent = Intent(activity, freg_Group::class.java)
+//            startActivity(intent)
+            //val secondFragment = addFriends() // Create an instance of SecondFragment
+            val secondFragment = addFriends()
+            activity?.supportFragmentManager?.beginTransaction()?.apply {
+                replace(R.id.frameLayout, secondFragment)
+                addToBackStack(null) // Optional, adds the transaction to the back stack
+                commit()
+            }
+        }
+            return view
+        }
 
 
-
+//    fun replaceFragment(fragment: Fragment) {
+//        val fragmentManager = supportFragmentManager
+//        val fragmentTransaction = fragmentManager.beginTransaction()
+//        fragmentTransaction.replace(R.id.frameLayout, fragment)
+//        fragmentTransaction.commit()
+//    }
     private fun getTransactionData() {
         val savedUsername = getUsername()
         db.collection("Transaction").get()

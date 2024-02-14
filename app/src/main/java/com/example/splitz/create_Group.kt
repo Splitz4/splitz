@@ -19,7 +19,7 @@ class create_Group : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
     private lateinit var binding: ActivityCreateGroupBinding
 
     var arrayList: ArrayList<ContactModel> = arrayListOf()
-    var rcvAdapter: RCVAdapter = RCVAdapter(arrayList)
+    var rcvAdapter: RCVAdapter = RCVAdapter(this,arrayList)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +35,7 @@ class create_Group : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
             binding.apply {
                 rcvContact.apply {
                     layoutManager = LinearLayoutManager(this@create_Group)
-                    adapter = RCVAdapter(arrayList)
+                    adapter = RCVAdapter(context,arrayList)
 
                 }
             }

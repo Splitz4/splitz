@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".addFriends">
 
 
@@ -66,23 +67,25 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="30dp"
             >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Add new friends"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:paddingLeft="50dp"
-            android:paddingRight="50dp"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add new friends"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:paddingLeft="50dp"
+                android:paddingRight="50dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"/>
 
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="340dp"
-            android:layout_alignParentBottom="true">
+            android:layout_height="300dp"
+            android:layout_alignParentBottom="true"
+            app:cardElevation="0dp"
+            >
 
             <RelativeLayout
                 android:layout_width="match_parent"
