@@ -21,12 +21,12 @@ class transactionAdapter(private val transactionList : ArrayList<transactionsDat
         val currentItem = transactionList[position]
 
         if(currentItem.IncomeAmount == "0"){
-            holder.incomeAmount.text = ""
+            holder.incomeAmount.text = "n"
             holder.transactionType.text = "Expense"
-            holder.transactionAmount.text = currentItem.ExpAmount
+            holder.transactionAmount.text = currentItem.ExpAmount ?: ""
         }
         else if (currentItem.ExpAmount == "0"){
-            holder.transactionAmount.text = ""
+            holder.transactionAmount.text = "N"
             holder.transactionType.text = "Income"
             holder.transactionAmount.text = currentItem.IncomeAmount
         }

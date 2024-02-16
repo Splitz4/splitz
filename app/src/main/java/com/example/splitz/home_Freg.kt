@@ -142,11 +142,11 @@ class home_Freg : Fragment() {
                 commit()
             }
         }
-            return view
-        }
+        return view
+    }
 
 
-//    fun replaceFragment(fragment: Fragment) {
+    //    fun replaceFragment(fragment: Fragment) {
 //        val fragmentManager = supportFragmentManager
 //        val fragmentTransaction = fragmentManager.beginTransaction()
 //        fragmentTransaction.replace(R.id.frameLayout, fragment)
@@ -159,8 +159,8 @@ class home_Freg : Fragment() {
                 val documents = collection.documents
                 for (document in documents) {
                     if(document.get("Name")==savedUsername){
-                             val Transactions = document.toObject(transactionsData::class.java)
-                             transactionList.add(Transactions!!)
+                        val Transactions = document.toObject(transactionsData::class.java)
+                        transactionList.add(Transactions!!)
                     }
                     userRecyclerView.adapter = transactionAdapter(transactionList)
 
