@@ -10,22 +10,24 @@ import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.cardview.widget.CardView
 
-class start_act : AppCompatActivity() {
+class start_act : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_start)
-
         val loginButtonCard : CardView = findViewById(R.id.loginButtonCard)
         val registerButtonCard : CardView = findViewById(R.id.registerButtonCard)
 
-        if (!isConnected()) {
-            buildDialog().show()
-        }
-        if (isLoggedIn()) {
+        showProgressDialog(resources.getString(R.string.please_click_back_again_to_exit))
 
+
+        if (isLoggedIn()) {
+            hideProgressDialog()
             val intent = Intent(this, Home::class.java)
             startActivity(intent)
             finish()
+        }
+        else{
+            hideProgressDialog()
         }
 
             loginButtonCard.setOnClickListener {
@@ -47,19 +49,5 @@ class start_act : AppCompatActivity() {
         // Retrieve the value of isLoggedIn from shared preferences
         return prefs.getBoolean(login.KEY_IS_LOGGED_IN, false)
     }
-    private fun isConnected(): Boolean {
-        val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val activeNetwork = connectivityManager.activeNetworkInfo
-        return activeNetwork != null && activeNetwork.isConnectedOrConnecting
-    }
-    private fun buildDialog(): AlertDialog {
-        val builder = AlertDialog.Builder(this)
-        builder.setTitle("No Internet Connection")
-            .setMessage("Dear user, you are not connected to the internet.")
-            .setCancelable(false)
-            .setPositiveButton("OK") { dialog, which ->
-                finish()
-            }
-        return builder.create()
-    }
+
 }

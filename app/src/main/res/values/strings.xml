@@ -17,5 +17,7 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="title_activity_register">register_activity</string>
     <string name="app_name" translatable="false">Splitz</string>
+    <string name="default_web_client_id" translatable="false">123.apps.googleusercontent.com</string>
+    <string name="please_click_back_again_to_exit" translatable="false">Please Wait</string>
 
 </resources>

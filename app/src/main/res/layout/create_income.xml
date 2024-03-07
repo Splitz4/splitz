@@ -16,8 +16,10 @@
         >
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/incomeDescEdit"
+            style="@style/description_Pop"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:drawableLeft="@drawable/description"
             android:padding="20dp">
 
         </com.google.android.material.textfield.TextInputEditText>
@@ -38,6 +40,8 @@
             android:layout_height="match_parent"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
+            style="@style/description_Pop"
+            android:drawableLeft="@drawable/amount"
             android:layout_below="@+id/expenseDescription"
             >
 
@@ -57,6 +61,7 @@
 
     </com.google.android.material.button.MaterialButton>
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/cancelIncome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/expenseAmount"

@@ -1,8 +1,14 @@
 package com.example.splitz
 
+import android.Manifest
+import android.app.Dialog
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -17,12 +23,18 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.cardview.widget.CardView
+import androidx.core.app.ActivityCompat
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.airbnb.lottie.Lottie
+import com.airbnb.lottie.LottieAnimationView
 import com.example.splitz.login.Companion.KEY_USERNAME
 import com.example.splitz.login.Companion.PREFS_NAME
 
@@ -33,18 +45,33 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreException
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.auth.User
-
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
+private lateinit var mProgressDialog: Dialog
 
 
-class home_Freg : Fragment() {
+interface progresBar {
+    fun showProgressDialog(context: Context, text: String)
+    fun hideProgressDialog()
+
+}
+
+
+class home_Freg : Fragment(), progresBar {
     // TODO: Rename and change types of parameters
+    private var mProgressDialog: Dialog? = null
     private var param1: String? = null
     private var param2: String? = null
     val db = FirebaseFirestore.getInstance()
+    private lateinit var emptyText : LottieAnimationView
+
+    val CHANNEL_ID : String = "channelId"
 
     private lateinit var userRecyclerView: RecyclerView
     private lateinit var transactionList: ArrayList<transactionsData>
@@ -53,8 +80,6 @@ class home_Freg : Fragment() {
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
-
-
         }
     }
 
@@ -68,12 +93,7 @@ class home_Freg : Fragment() {
         val incomeBtn = view.findViewById<CardView>(R.id.cardReqIcon)
         val splitzBtn = view.findViewById<CardView>(R.id.splitzIcon)
         val totalBalance = view.findViewById<TextView>(R.id.addExpText)
-
-
-
-
-
-
+        emptyText = view.findViewById(R.id.noExpText)
 
         userRecyclerView = view.findViewById(R.id.recycler_viewTransactions)
         //userRecyclerView.LayoutManager = LinearLayoutManager(this)
@@ -82,7 +102,6 @@ class home_Freg : Fragment() {
         userRecyclerView.setHasFixedSize(true)
 
         transactionList = arrayListOf<transactionsData>()
-
         getTransactionData()
 
 
@@ -101,7 +120,7 @@ class home_Freg : Fragment() {
                     for (document in documents) {
                         val incomeAmount =
                             document.getString("IncomeAmount")?.toDoubleOrNull() ?: 0.0
-                        val expenseAmount = document.getString("ExpAmount")?.toDoubleOrNull() ?: 0.0
+                        val expenseAmount = document.getDouble("ExpAmount") ?: 0.0
 
                         totalIncome += incomeAmount
                         totalExpenses += expenseAmount
@@ -114,18 +133,8 @@ class home_Freg : Fragment() {
                 .addOnFailureListener { exception ->
                     Log.w(TAG, "Error getting documents: ", exception)
                 }
-        } else {
-
         }
-
-
-
-
-
-
-
         addExpbtn.setOnClickListener {
-
             showPopupForm()
         }
         incomeBtn.setOnClickListener {
@@ -135,6 +144,7 @@ class home_Freg : Fragment() {
 //            val intent = Intent(activity, freg_Group::class.java)
 //            startActivity(intent)
             //val secondFragment = addFriends() // Create an instance of SecondFragment
+            //onBackPressed()
             val secondFragment = addFriends()
             activity?.supportFragmentManager?.beginTransaction()?.apply {
                 replace(R.id.frameLayout, secondFragment)
@@ -145,27 +155,47 @@ class home_Freg : Fragment() {
         return view
     }
 
-
-    //    fun replaceFragment(fragment: Fragment) {
-//        val fragmentManager = supportFragmentManager
-//        val fragmentTransaction = fragmentManager.beginTransaction()
-//        fragmentTransaction.replace(R.id.frameLayout, fragment)
-//        fragmentTransaction.commit()
-//    }
     private fun getTransactionData() {
+        showProgressDialog(
+            requireContext(),
+            resources.getString(R.string.please_click_back_again_to_exit)
+        )
         val savedUsername = getUsername()
         db.collection("Transaction").get()
             .addOnSuccessListener { collection ->
+                hideProgressDialog()
                 val documents = collection.documents
                 for (document in documents) {
-                    if(document.get("Name")==savedUsername){
+                    if (document.get("Name") == savedUsername) {
                         val Transactions = document.toObject(transactionsData::class.java)
-                        transactionList.add(Transactions!!)
+                        //transactionList.add(Transactions!!)
+                        Transactions?.let {
+                            transactionList.add(it)
+                        }
                     }
+
+                }
+                if (transactionList != emptyList<transactionsData>()) {
+
                     userRecyclerView.adapter = transactionAdapter(transactionList)
 
                 }
+                else{
+                    emptyText.visibility = View.VISIBLE
+                }
             }
+    }
+
+    override fun showProgressDialog(context: Context, text: String) {
+        mProgressDialog = Dialog(context)
+        mProgressDialog?.setContentView(R.layout.dialog_progress)
+        // Set progress text or any other configurations
+        // mProgressDialog.tv_progress_text.text = text
+        mProgressDialog?.show()
+    }
+
+    override fun hideProgressDialog() {
+        mProgressDialog?.dismiss()
     }
 
     private fun showPopupForm() {
@@ -176,36 +206,58 @@ class home_Freg : Fragment() {
 
         val alertDialogBuilder = AlertDialog.Builder(requireContext())
             .setView(dialogView)
-            .setTitle("Income Form")
+            .setTitle("Expense Form")
 
         val alertDialog = alertDialogBuilder.create()
 
 
         val submitButton = dialogView.findViewById<Button>(R.id.saveExp)
+        val cancelButton = dialogView.findViewById<Button>(R.id.cancelExp)
+
         submitButton.setOnClickListener {
             var expDescVal = expDesc.text.toString()
-            var expAmou = expAmou.text.toString()
+            var expAmou = expAmou.text.toString().toDouble()
             val savedUsername = getUsername()
+            val currentTime = Calendar.getInstance().time
+            val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+            val timestamp = dateFormat.format(currentTime)
+            val parsedDateTime = dateFormat.parse(timestamp)
+            val date = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(parsedDateTime)
+            val time = SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(parsedDateTime)
+
             if (savedUsername != null) {
                 val Transaction = hashMapOf(
                     "Description" to expDescVal,
                     "ExpAmount" to expAmou,
                     "Name" to savedUsername,
-                    "IncomeAmount" to "0"
+                    "IncomeAmount" to "0",
+                    "Date" to date,
+                    "Time" to time
                 )
                 db.collection("Transaction")
                     .add(Transaction)
                     .addOnSuccessListener {
-                        Toast.makeText(activity, "Working", Toast.LENGTH_LONG).show()
+                        createNotificationChannel()
+                        sendExpNotify()
+                        getTransactionData()
+                        val secondFragment = freg_Group()
+                        activity?.supportFragmentManager?.beginTransaction()?.apply {
+                            alertDialog.dismiss()
+                            replace(R.id.frameLayout, secondFragment)
+                            addToBackStack(null) // Optional, adds the transaction to the back stack
+                            commit()
+                        }
                     }
             } else {
                 activity?.recreate()
             }
 
-            //            val intent = Intent(activity, addExpense::class.java)
-//            startActivity(intent)
+
 //
 //            alertDialog.dismiss()
+        }
+        cancelButton.setOnClickListener {
+            alertDialog.dismiss()
         }
 
         // Show the dialog
@@ -225,21 +277,39 @@ class home_Freg : Fragment() {
 
 
         val submitButton = dialogView.findViewById<Button>(R.id.saveIncome)
+        val cancelButton = dialogView.findViewById<Button>(R.id.cancelIncome)
         submitButton.setOnClickListener {
             var expDescVal = incomeDesc.text.toString()
             var expAmou = incomeAmou.text.toString()
             val savedUsername = getUsername()
+            val currentTime = Calendar.getInstance().time
+            val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+            val timestamp = dateFormat.format(currentTime)
+            val parsedDateTime = dateFormat.parse(timestamp)
+            val date = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(parsedDateTime)
+            val time = SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(parsedDateTime)
             if (savedUsername != null) {
                 val Transaction = hashMapOf(
                     "Description" to expDescVal,
                     "IncomeAmount" to expAmou,
                     "Name" to savedUsername,
-                    "ExpAmount" to "0"
+                    "ExpAmount" to 0,
+                    "Date" to date,
+                    "Time" to time
                 )
                 db.collection("Transaction")
                     .add(Transaction)
                     .addOnSuccessListener {
-                        Toast.makeText(activity, "Working", Toast.LENGTH_LONG).show()
+                        getTransactionData()
+                        createNotificationChannel()
+                        sendIncNotify()
+                        val secondFragment = freg_Group()
+                        activity?.supportFragmentManager?.beginTransaction()?.apply {
+                            alertDialog.dismiss()
+                            replace(R.id.frameLayout, secondFragment)
+                            addToBackStack(null) // Optional, adds the transaction to the back stack
+                            commit()
+                        }
                     }
             } else {
                 activity?.recreate()
@@ -250,12 +320,13 @@ class home_Freg : Fragment() {
 //
 //            alertDialog.dismiss()
         }
+        cancelButton.setOnClickListener {
+            alertDialog.dismiss()
+        }
 
         // Show the dialog
         alertDialog.show()
     }
-
-
 
     private fun getUsername(): String? {
         // Retrieve the shared preferences
@@ -265,6 +336,55 @@ class home_Freg : Fragment() {
         return prefs?.getString(KEY_USERNAME, null)
     }
 
+    private fun sendExpNotify(){
+        var builder = NotificationCompat.Builder(requireContext(), CHANNEL_ID)
+        builder.setSmallIcon(R.drawable.logo2)
+            .setContentTitle("Splitz Notification")
+            .setContentText("Expense amount added to your account")
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+
+        with(NotificationManagerCompat.from(requireContext())){
+            if (ActivityCompat.checkSelfPermission(
+                    requireContext(),
+                    Manifest.permission.POST_NOTIFICATIONS
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+
+            }
+            notify(1,builder.build())
+        }
+    }
+
+    private fun sendIncNotify(){
+        var builder = NotificationCompat.Builder(requireContext(), CHANNEL_ID)
+        builder.setSmallIcon(R.drawable.logo2)
+            .setContentTitle("Splitz Notification")
+            .setContentText("Income amount added to your account")
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+
+        with(NotificationManagerCompat.from(requireContext())){
+            if (ActivityCompat.checkSelfPermission(
+                    requireContext(),
+                    Manifest.permission.POST_NOTIFICATIONS
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+
+            }
+            notify(1,builder.build())
+        }
+    }
+
+    private fun createNotificationChannel(){
+           if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+               val channel = NotificationChannel(CHANNEL_ID, "First Channel",
+               NotificationManager.IMPORTANCE_DEFAULT
+                   )
+               channel.description = "test description for my channel"
+
+               val notificationManager = activity?.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+               notificationManager.createNotificationChannel(channel)
+           }
+    }
 
 
 

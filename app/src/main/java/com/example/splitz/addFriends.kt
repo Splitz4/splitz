@@ -1,5 +1,6 @@
 package com.example.splitz
 
+import android.app.Dialog
 import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
@@ -17,8 +18,10 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.cardview.widget.CardView
+import androidx.lifecycle.Lifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.airbnb.lottie.LottieAnimationView
 import com.google.android.gms.common.util.Strings
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.firestore.DocumentChange
@@ -40,17 +43,25 @@ private const val ARG_PARAM2 = "param2"
  * Use the [addFriends.newInstance] factory method to
  * create an instance of this fragment.
  */
-class addFriends : Fragment() {
+interface progresBars{
+    fun showProgressDialog(context:Context, text: String)
+    fun hideProgressDialog()
+
+}
+
+class addFriends : Fragment(),  progresBars{
     // TODO: Rename and change types of parameters
+    private var mProgressDialog: Dialog? = null
     private var param1: String? = null
     private var param2: String? = null
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var friendsList: ArrayList<friendsData>
-    private lateinit var adapter: ArrayAdapter<String>
 
+    private  var recyclerView: RecyclerView? = null
+    private lateinit var friendsList: ArrayList<friendsData>
+    private lateinit var friendsAdapter: friendsAdapter
     //  private lateinit var friendsAdapter: friendsAdapter
     private lateinit var db: FirebaseFirestore
     private lateinit var autoCompleteTextView: AutoCompleteTextView
+    private lateinit var noFriendsText : LottieAnimationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,14 +77,14 @@ class addFriends : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_add_friends, container, false)
         val buttonContact = view.findViewById<CardView>(R.id.buttonContact)
-        val splitButton = view.findViewById<CardView>(R.id.splitAmount11)
+        noFriendsText = view.findViewById(R.id.noFriendsText)
 
 
 
         recyclerView = view.findViewById(R.id.friendsRecyclerView)
-        recyclerView.layoutManager =
+        recyclerView?.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        recyclerView.setHasFixedSize(true)
+        recyclerView?.setHasFixedSize(true)
         friendsList = arrayListOf<friendsData>()
         eventChangeListner()
 //        friendsAdapter = friendsAdapter(friendsList)
@@ -84,34 +95,36 @@ class addFriends : Fragment() {
 
         }
 
-        splitButton.setOnClickListener {
 
-            showPopupForm()
-            //Toast.makeText(requireContext(),"workn",Toast.LENGTH_LONG).show()
-
-        }
         return view
 
     }
 
     private fun eventChangeListner() {
+        showProgressDialog(requireContext(),resources.getString(R.string.please_click_back_again_to_exit))
         val savedUsername = getUsername()
         db = FirebaseFirestore.getInstance()
 
+
         db.collection("UserFriends").get()
             .addOnSuccessListener { collection ->
+                hideProgressDialog()
                 val documents = collection.documents
                 for (document in documents) {
-                    if(document.get("UserName")==savedUsername){
+                    if (document.get("UserName") == savedUsername) {
                         val friends = document.toObject(friendsData::class.java)
                         friendsList.add(friends!!)
                     }
-                    recyclerView.adapter = friendsAdapter(friendsList, requireContext())
-
+                }
+                if(friendsList!= emptyList<friendsData>()) {
+                    recyclerView?.adapter = friendsAdapter(friendsList, requireContext())
+                }
+                else{
+                    noFriendsText.visibility = View.VISIBLE
                 }
             }
-
     }
+
 
     private fun getUsername(): String? {
         // Retrieve the shared preferences
@@ -122,8 +135,13 @@ class addFriends : Fragment() {
     }
 
     private fun navigateButton() {
-        val intent = Intent(activity, contactList::class.java)
-        startActivity(intent)
+        val secondFragment = contact_list()
+        activity?.supportFragmentManager?.beginTransaction()?.apply {
+
+            replace(R.id.frameLayout, secondFragment)
+            addToBackStack(null) // Optional, adds the transaction to the back stack
+            commit()
+        }
     }
 
     private fun showPopupForm() {
@@ -157,7 +175,12 @@ class addFriends : Fragment() {
                 db.collection("Transaction")
                     .add(Transaction)
                     .addOnSuccessListener {
-                        Toast.makeText(activity, "Working", Toast.LENGTH_LONG).show()
+                        val secondFragment = freg_Group()
+                        activity?.supportFragmentManager?.beginTransaction()?.apply {
+                            replace(R.id.frameLayout, secondFragment)
+                            addToBackStack(null) // Optional, adds the transaction to the back stack
+                            commit()
+                        }
                     }
             } else {
                 activity?.recreate()
@@ -173,6 +196,17 @@ class addFriends : Fragment() {
         alertDialog.show()
     }
 
+    override fun showProgressDialog(context: Context, text: String) {
+        mProgressDialog = Dialog(context)
+        mProgressDialog?.setContentView(R.layout.dialog_progress)
+        // Set progress text or any other configurations
+        // mProgressDialog?.tv_progress_text?.text = text
+        mProgressDialog?.show()
+    }
+
+    override fun hideProgressDialog() {
+        mProgressDialog?.dismiss()
+    }
 
 
 }

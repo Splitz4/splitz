@@ -80,37 +80,28 @@
 
         </androidx.cardview.widget.CardView>
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/splitAmount11"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/buttonContact"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="30dp"
-            >
-            <TextView
-                android:id="@+id/splitButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Split"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:paddingLeft="50dp"
-                android:paddingRight="50dp"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"/>
 
-        </androidx.cardview.widget.CardView>
 
         <TextView
+            android:id="@+id/friendsList"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:text="Friends List"
-            android:layout_below="@+id/splitAmount11"
-            android:layout_marginTop="60dp"
-            android:layout_marginLeft="10dp"
+            android:layout_below="@+id/buttonContact"
+            android:layout_marginTop="140dp"
+            android:layout_marginStart="20dp"
+            android:textStyle="bold"
             />
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/noFriendsText"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            app:lottie_autoPlay="true"
+            android:visibility="invisible"
+            android:layout_below="@+id/friendsList"
+            android:layout_centerHorizontal="true"
+            app:lottie_rawRes="@raw/addfriends"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -118,6 +109,7 @@
             android:layout_alignParentBottom="true"
             android:layout_below="@+id/background_Color"
             >
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/friendsRecyclerView"
                 android:layout_width="match_parent"

@@ -1,21 +1,24 @@
 package com.example.splitz
 
 import android.content.Context
-import android.content.Intent
+import android.text.TextUtils.replace
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.splitz.databinding.ContactChildBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.QuerySnapshot
 import java.util.ArrayList
 
-class RCVAdapter (
-    private var c:Context,
-    val contactL:ArrayList<ContactModel>
+class RCVAdapter(
+    val contactL:ArrayList<ContactModel>,
+
+    private var c: Context
+
 ):RecyclerView.Adapter<RCVAdapter.MyViewHolder>(){
+
     private lateinit var firebaseAuth : FirebaseAuth
     val db = FirebaseFirestore.getInstance()
     inner class MyViewHolder(val binding: ContactChildBinding) : RecyclerView.ViewHolder(binding.root){
@@ -24,7 +27,9 @@ class RCVAdapter (
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RCVAdapter.MyViewHolder {
+
         return MyViewHolder(ContactChildBinding.inflate(LayoutInflater.from(parent.context),parent, false))
+
     }
 
     override fun onBindViewHolder(holder: RCVAdapter.MyViewHolder, position: Int) {
@@ -45,7 +50,13 @@ class RCVAdapter (
             db.collection("UserFriends")
                 .add(UserFriends)
                 .addOnSuccessListener {
-                    Toast.makeText(c, "Working", Toast.LENGTH_LONG).show()
+                    val newFragment = addFriends()
+                    val transaction =
+                        (holder.binding.root.context as FragmentActivity).supportFragmentManager.beginTransaction()
+                    transaction.replace(R.id.frameLayout, newFragment)
+                    transaction.addToBackStack(null)
+                    transaction.commit()
+
                 }
         }
 

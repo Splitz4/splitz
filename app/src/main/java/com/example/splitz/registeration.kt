@@ -11,7 +11,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.auth.User
 
-class registeration : AppCompatActivity() {
+class registeration : BaseActivity() {
 
     private lateinit var binding: ActivityRegisterationBinding
     private lateinit var firebaseAuth : FirebaseAuth
@@ -54,6 +54,7 @@ class registeration : AppCompatActivity() {
         })
 
         btn_register.setOnClickListener {
+            showProgressDialog(resources.getString(R.string.please_click_back_again_to_exit))
             val email = et_email.text.toString()
             val name = et_name.text.toString()
             val pass =  et_password.text.toString()
@@ -66,8 +67,9 @@ class registeration : AppCompatActivity() {
                         if (it.isSuccessful){
                             firebaseAuth.currentUser?.sendEmailVerification()
                                 ?.addOnSuccessListener {
-                                    Toast.makeText(this, "Please check you email for verification",
-                                        Toast.LENGTH_LONG).show()
+                                    hideProgressDialog()
+                                    showSuccessSnackBar("Please check you email for verification")
+
                                     val User = hashMapOf(
                                         "Name" to name,
                                         "Email" to email,
@@ -84,15 +86,18 @@ class registeration : AppCompatActivity() {
                         }
 
                         else{
-                                Toast.makeText(this, it.exception.toString(),Toast.LENGTH_LONG).show()
+                               // Toast.makeText(this, it.exception.toString(),Toast.LENGTH_LONG).show()
+                            showErrorSnackBar(it.exception.toString())
                         }
                     }
 
                 }else{
-                    Toast.makeText(this,"Both Password is not matching", Toast.LENGTH_LONG).show()
+                    //Toast.makeText(this,"", Toast.LENGTH_LONG).show()
+                    showErrorSnackBar("Both Password is not matching")
                 }
             }else{
-                Toast.makeText(this,"Empty fields can not be submitted", Toast.LENGTH_LONG).show()
+                showErrorSnackBar("Empty fields can not be submitted")
+
             }
         }
 

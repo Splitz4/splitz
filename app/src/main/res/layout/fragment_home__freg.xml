@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="">
+
+    >
 
     <view
         class="android.widget.ImageView"
@@ -183,9 +184,18 @@
             android:layout_marginTop="120dp"
             android:text="Expenses"
             android:textStyle="bold"
-            android:textSize="20dp" />
+            android:textSize="20sp" />
 
 
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/noExpText"
+            android:layout_width="200dp"
+            android:visibility="gone"
+            android:layout_height="200dp"
+            android:layout_below="@+id/expenseList"
+            android:layout_centerHorizontal="true"
+            app:lottie_autoPlay="true"
+            app:lottie_rawRes="@raw/transaction"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_viewTransactions"
@@ -194,6 +204,7 @@
                 tools:listitem="@layout/transactions_view"
                 android:orientation="horizontal"
                 android:layout_below="@+id/expenseList"
+
                 />
 
 

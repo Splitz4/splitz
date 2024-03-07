@@ -1,104 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".setting_Freg">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="20dp"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/userLog"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/user2"
+            android:textAlignment="center"
+            app:shapeAppearanceOverlay="@style/roundedImageView">
+
+        </com.google.android.material.imageview.ShapeableImageView>
+        <TextView
+            android:id="@+id/userName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Username"
+            android:layout_below="@+id/userLog"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"
+            android:layout_alignParentBottom="true"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Copyright 2024 @Splitz"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="20dp"
+            />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/menuProfile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="80dp"
         >
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            >
+            android:layout_height="wrap_content">
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <androidx.appcompat.widget.SwitchCompat
-                    android:id="@+id/darkModeSwitch"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Dark Mode"
-                    style="@style/settingsText"
-                    android:drawableLeft="@drawable/ic_dark_mode"
-                    >
-
-                </androidx.appcompat.widget.SwitchCompat>
                 <TextView
-                    android:id="@+id/profileText"
-                    style="@style/viewParent.headerText.settingsMiniTitle"
-                    android:text="Profile"
-                    android:layout_below="@+id/darkModeSwitch"
-                    />
-
-                <TextView
-                    android:id="@id/buttonEditProfile"
+                    android:id="@+id/buttonEditProfile"
                     style="@style/viewParent.headerText.settingsTextIcon"
                     android:drawableLeft="@drawable/ic_edit_profile"
                     android:text="Edit Profile"
-                    android:layout_below="@+id/profileText"
 
                     />
                 <TextView
-                    android:id="@+id/notificationText"
+                    android:id="@+id/contactTeam"
                     style="@style/viewParent.headerText.settingsMiniTitle"
-                    android:text="Notifications"
-                    android:layout_below="@+id/buttonEditProfile"
-                    />
-                <androidx.appcompat.widget.SwitchCompat
-                    android:id="@+id/notificationSwitch"
-                    style="@style/settingsText"
-                    android:checked="true"
-                    android:drawableLeft="@drawable/ic_notifications"
-                    android:text="Notifications"
-                    android:layout_below="@+id/notificationText"
-                    />
+                    android:layout_below="@id/buttonEditProfile"
+                    android:text="Contact Us" />
+                <TextView
+                    android:id="@+id/ourTeam"
+                    style="@style/viewParent.headerText.settingsTextIcon"
+                    android:layout_below="@+id/contactTeam"
+                    android:drawableLeft="@drawable/ic_logout"
+                    android:text="Our Team" />
+                <TextView
+                    android:id="@+id/RateUs"
+                    style="@style/viewParent.headerText.settingsTextIcon"
+                    android:layout_below="@+id/ourTeam"
+                    android:drawableLeft="@drawable/ic_logout"
+                    android:text="Rate Us" />
 
                 <TextView
                     android:id="@+id/regionalText"
                     style="@style/viewParent.headerText.settingsMiniTitle"
-                    android:text="Regional"
-                    android:layout_below="@id/notificationSwitch"
-                    />
+                    android:layout_below="@id/RateUs"
+                    android:text="Regional" />
 
                 <TextView
                     android:id="@+id/buttonReg"
                     style="@style/viewParent.headerText.settingsTextIcon"
-                    android:drawableLeft="@drawable/ic_languages"
-                    android:text="Language"
                     android:layout_below="@id/regionalText"
-                    />
+                    android:drawableLeft="@drawable/ic_languages"
+                    android:text="Language" />
 
                 <TextView
                     android:id="@+id/logoutApp"
                     style="@style/viewParent.headerText.settingsTextIcon"
-                    android:drawableLeft="@drawable/ic_logout"
-                    android:text="Logout"
                     android:layout_below="@+id/buttonReg"
-                    />
+                    android:drawableLeft="@drawable/ic_logout"
+                    android:text="Logout" />
 
 
             </RelativeLayout>
 
         </ScrollView>
         <!--    &lt;!&ndash; TODO: Update blank fragment layout &ndash;&gt;-->
-<!--    <com.google.android.material.navigation.NavigationView-->
-<!--        android:id="@+id/navigation_view"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_alignParentEnd="true"-->
-<!--        app:menu="@menu/nav_side"-->
-<!--        android:layout_gravity="start"-->
-<!--        android:fitsSystemWindows="true"-->
-<!--        >-->
+        <!--    <com.google.android.material.navigation.NavigationView-->
+        <!--        android:id="@+id/navigation_view"-->
+        <!--        android:layout_width="wrap_content"-->
+        <!--        android:layout_height="wrap_content"-->
+        <!--        android:layout_alignParentEnd="true"-->
+        <!--        app:menu="@menu/nav_side"-->
+        <!--        android:layout_gravity="start"-->
+        <!--        android:fitsSystemWindows="true"-->
+        <!--        >-->
 
-<!--    </com.google.android.material.navigation.NavigationView>-->
+        <!--    </com.google.android.material.navigation.NavigationView>-->
+
     </RelativeLayout>
 </FrameLayout>

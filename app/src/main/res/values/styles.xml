@@ -8,6 +8,10 @@
         <item name="colorAccent">@color/colorAccent</item>
         <!-- Add more styles as needed -->
     </style>
+    <style name="roundedImageView">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
 
     <style name="AppTheme.Dark" parent="Theme.AppCompat">
         <!-- Dark mode styles -->

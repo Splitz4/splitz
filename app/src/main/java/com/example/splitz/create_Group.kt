@@ -18,8 +18,8 @@ class create_Group : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
 
     private lateinit var binding: ActivityCreateGroupBinding
 
-    var arrayList: ArrayList<ContactModel> = arrayListOf()
-    var rcvAdapter: RCVAdapter = RCVAdapter(this,arrayList)
+    var arrayList: ArrayList<groupModel> = arrayListOf()
+    var groupAdapter: groupAdapter = groupAdapter(this,arrayList)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +35,7 @@ class create_Group : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
             binding.apply {
                 rcvContact.apply {
                     layoutManager = LinearLayoutManager(this@create_Group)
-                    adapter = RCVAdapter(context,arrayList)
+                    adapter = groupAdapter(context,arrayList)
 
                 }
             }
@@ -57,16 +57,17 @@ class create_Group : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
                     ), null, null,
                 ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME
             )
-        while (cursor!!.moveToNext()) {
+        while (cursor?.moveToNext() == true) {
             val contactName =
                 cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME))
             val contactNumber =
                 cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))
-            val contactModel = ContactModel(contactName, contactNumber)
-            arrayList.add(contactModel)
+            val groupModel = groupModel(contactName, contactNumber, Selected = true)
+            arrayList.add(groupModel)
         }
-        rcvAdapter.notifyDataSetChanged()
-        cursor.close()
+
+        groupAdapter.notifyDataSetChanged()
+        cursor?.close()
     }
 
 

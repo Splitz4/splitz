@@ -26,7 +26,7 @@ import com.google.firebase.firestore.auth.User
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
-class login : AppCompatActivity() {
+class login : BaseActivity() {
 
 
     companion object {
@@ -56,7 +56,7 @@ class login : AppCompatActivity() {
             .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
             .build()
-        googleSignInClient = GoogleSignIn.getClient(this, gso)
+            googleSignInClient = GoogleSignIn.getClient(this, gso)
 
 
 
@@ -67,10 +67,6 @@ class login : AppCompatActivity() {
         if (!isConnected()) {
             buildDialog().show()
         }
-
-
-
-
 
         logingoogle.setOnClickListener {
             signInGoogle()
@@ -86,7 +82,7 @@ class login : AppCompatActivity() {
 
 
         if (validate(etEmail, etPass)) {
-
+            showProgressDialog(resources.getString(R.string.please_click_back_again_to_exit))
             //Toast.makeText(this, "Working01", Toast.LENGTH_LONG).show()
             //showProgressDialog(resources.getString(R.string.please_click_back_again_to_exit))
             auth.signInWithEmailAndPassword(etEmail, etPass)
@@ -99,13 +95,9 @@ class login : AppCompatActivity() {
                         Log.d("Sign in", "signInWithEmail:success")
                         val user = auth.currentUser
                         if (!user!!.isEmailVerified) {
+                            hideProgressDialog()
 
-                            //hideProgressDialog()
-                            Toast.makeText(
-                                this,
-                                "Please verify your account first",
-                                Toast.LENGTH_LONG
-                            ).show()
+                            showErrorSnackBar("Please verify your account first")
 
 
                         } else {
@@ -119,11 +111,11 @@ class login : AppCompatActivity() {
                                     for (document in documents) {
                                         if (document.get("Email") == etEmail) {
                                             saveLoggedInStatus(true)
+                                            hideProgressDialog()
                                             val username = document.getString("Name")
                                             if (username != null) {
                                                 saveUsername(username)
                                             }
-
                                             val intent = Intent(this, Home::class.java)
                                             //val Name = intent.putExtra("username", "$username")
 
@@ -134,14 +126,15 @@ class login : AppCompatActivity() {
                                     }
                                 }.addOnFailureListener { exception ->
                                     // Handle any errors
-                                    Toast.makeText(this, "task", Toast.LENGTH_LONG).show()
+                                    showErrorSnackBar("$exception")
                                 }
                         }
 
                         // updateUI(user)
                         // readData()
                     } else {
-                        Toast.makeText(this, "Wrong Details", Toast.LENGTH_LONG).show()
+                        hideProgressDialog()
+                        showErrorSnackBar("Please enter the details properly or check Internet connection")
                         // If sign in fails, display a message to the user.
 //                        hideProgressDialog()
 //                        Log.w("Sign in", "signInWithEmail:failure", task.exception)
@@ -175,7 +168,8 @@ class login : AppCompatActivity() {
                 updateUI(account)
             }
         }else{
-            Toast.makeText(this, task.exception.toString(), Toast.LENGTH_LONG).show()
+
+            showErrorSnackBar(task.exception.toString())
         }
     }
 
@@ -188,7 +182,7 @@ class login : AppCompatActivity() {
                 startActivity(intent)
                 finish()
             }else{
-                Toast.makeText(this, it.exception.toString(), Toast.LENGTH_LONG).show()
+                showErrorSnackBar(it.exception.toString())
             }
         }
 
@@ -224,12 +218,12 @@ class login : AppCompatActivity() {
     private fun validate(etEmail: String, etPass: String): Boolean {
         return when {
             TextUtils.isEmpty(etEmail) -> {
-                Toast.makeText(this, "Please enter proper username", Toast.LENGTH_LONG).show()
+                showErrorSnackBar("Please enter proper username")
                 //showErrorSnackBar("Please enter proper username")
                 false
             }
             TextUtils.isEmpty(etPass) -> {
-                Toast.makeText(this, "Please enter proper password", Toast.LENGTH_LONG).show()
+                showErrorSnackBar("Please enter proper password")
                 //showErrorSnackBar("Please enter proper password")
                 false
             }

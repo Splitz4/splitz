@@ -10,14 +10,14 @@ import android.widget.ImageView
 import android.widget.RelativeLayout
 
 class splashScreen : AppCompatActivity() {
-    private lateinit var fadeInAnimation: Animation
+    //private lateinit var fadeInAnimation: Animation
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
 
-        val backImage : ImageView = findViewById(R.id.splashLayout)
-        val sideAnim = AnimationUtils.loadAnimation(this,R.anim.splashscreen_anim)
-        backImage.startAnimation(sideAnim)
+//        val backImage : ImageView = findViewById(R.id.splashLayout)
+//        val sideAnim = AnimationUtils.loadAnimation(this,R.anim.splashscreen_anim)
+//        backImage.startAnimation(sideAnim)
 
        Handler().postDelayed({
              startActivity(Intent(this, start_act::class.java))

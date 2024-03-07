@@ -1,21 +1,11 @@
 package com.example.splitz
 
-import android.content.Context
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.ContactsContract
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.TextView
-import androidx.core.content.ContextCompat
-import androidx.core.content.PermissionChecker
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.splitz.databinding.ActivityContactListBinding
-import com.example.splitz.databinding.ContactChildBinding
 import pub.devrel.easypermissions.AppSettingsDialog
 import pub.devrel.easypermissions.EasyPermissions
 import java.util.ArrayList
@@ -24,8 +14,9 @@ import java.util.ArrayList
 class contactList : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
     private lateinit var binding : ActivityContactListBinding
 
-    var arrayList:ArrayList<ContactModel> = arrayListOf()
-    var rcvAdapter:RCVAdapter = RCVAdapter(this,arrayList)
+    //private lateinit var binding: ActivityContactListBinding
+    private lateinit var rcvAdapter: RCVAdapter
+    private val arrayList: ArrayList<ContactModel> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +28,7 @@ class contactList : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
             binding.apply {
                 rcvContact.apply {
                     layoutManager = LinearLayoutManager(this@contactList)
-                    adapter = RCVAdapter(context,arrayList)
+                    adapter = RCVAdapter(arrayList,context)
 
                 }
             }

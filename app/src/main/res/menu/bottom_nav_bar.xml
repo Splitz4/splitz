@@ -1,19 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
-    <item android:id="@+id/home"
+    <item
+        android:id="@+id/home"
        android:title="Home"
-       android:icon="@drawable/baseline_home_24"/>
+       android:icon="@drawable/baseline_home_24"
+       app:cnb_backgroundColor="#fff"
+        />
     <item android:id="@+id/group"
-        android:title="Group"
-        android:icon="@drawable/baseline_group_24"
+        android:title="Analysis"
+        android:icon="@drawable/baseline_analytics_24"
+        app:cnb_backgroundColor="#fff"
         />
     <item android:id="@+id/friends"
         android:title="Friends"
-        android:icon="@drawable/baseline_person_24"/>
+        android:icon="@drawable/baseline_person_24"
+        app:cnb_backgroundColor="#fff"
+        />
     <item android:id="@+id/setting"
         android:title="Setting"
-        android:icon="@drawable/baseline_settings_24"/>
+        android:icon="@drawable/baseline_settings_24"
+        app:cnb_backgroundColor="#fff"
+        />
 </menu>

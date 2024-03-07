@@ -67,33 +67,68 @@ class setting_Freg : Fragment(){
         // Check the current theme and set the switch state accordingly
         val buttonReg = view.findViewById<TextView>(R.id.buttonReg)
         val logoutApp = view.findViewById<TextView>(R.id.logoutApp)
-        val darkModeSwitch = view.findViewById<SwitchCompat>(R.id.darkModeSwitch)
-            darkModeSwitch.isChecked = AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES
+        val editProfile = view.findViewById<TextView>(R.id.buttonEditProfile)
+        val ourTeam = view.findViewById<TextView>(R.id.ourTeam)
 
         val auth = FirebaseAuth.getInstance()
-        logoutApp.setOnClickListener {
-            auth.signOut()
 
-            saveLoggedInStatus(isLoggedIn = false)
-            val intent = Intent(activity, splashScreen::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            startActivity(intent)
-            activity?.finish()
+        editProfile.setOnClickListener {
+            showPopupProfile()
         }
-
-
-        darkModeSwitch.setOnCheckedChangeListener { _, isChecked ->
-            // Apply the selected theme based on the switch state
-            if (isChecked) {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-            } else {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        ourTeam.setOnClickListener {
+            val secondFragment = outTeam()
+            activity?.supportFragmentManager?.beginTransaction()?.apply {
+                replace(R.id.frameLayout, secondFragment)
+                addToBackStack(null) // Optional, adds the transaction to the back stack
+                commit()
             }
         }
+        logoutApp.setOnClickListener {
+
+            val builder = AlertDialog.Builder(requireContext())
+            builder.setMessage("Are you sure you want to log out?")
+
+            builder.setCancelable(false)
+            builder.setPositiveButton("OK") { dialog, _ ->
+                auth.signOut()
+
+                saveLoggedInStatus(isLoggedIn = false)
+                val intent = Intent(activity, splashScreen::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
+                activity?.finish()
+                // You can perform any action here when the user clicks OK
+            }
+            builder.setNegativeButton("CANCEL"){ dialog, _ ->
+                dialog.dismiss()
+
+            }
+            val dialog = builder.create()
+            dialog.show()
+
+
+        }
+
+
         buttonReg.setOnClickListener {
                  showChangeLang()
         }
         }
+
+    private fun showPopupProfile() {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setCancelable(false)
+        builder.setMessage("Edit or View your profile")
+        builder.setPositiveButton("Edit") { dialog, _ ->
+            dialog.dismiss()
+        }
+        builder.setNegativeButton("View") { dialog, _ ->
+            dialog.dismiss()
+        }
+        val dialog = builder.create()
+        dialog.show()
+    }
+
     private fun showChangeLang(){
         val listItems = arrayOf("Gujrati","English","Hindi")
 
