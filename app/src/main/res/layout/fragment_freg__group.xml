@@ -27,6 +27,14 @@
             >
 
         </ImageView>
+        <ImageView
+            android:id="@+id/backTraceAnalysis"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_arrow_back_white_24"
+            android:layout_marginTop="35dp"
+            android:layout_marginStart="20dp"
+            />
         <TextView
             android:id="@+id/analysisHead"
             android:layout_width="wrap_content"
@@ -70,7 +78,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/statsCard"
+            android:id="@+id/settingsCard"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_below="@+id/analysisHead"
@@ -79,57 +87,24 @@
             app:cardElevation="4dp"
 
             app:cardCornerRadius="5dp">
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-                <ImageView
-                    android:id="@+id/statsIcon"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:src="@drawable/analytics"
-                    android:layout_centerInParent="true"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="15sp"
-                    android:layout_below="@id/statsIcon"
-                    android:layout_centerHorizontal="true"
-                    android:text="Statistics"/>
-            </RelativeLayout>
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/settingsCard"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_below="@+id/analysisHead"
-            android:layout_marginTop="20dp"
-            android:layout_marginStart="280dp"
-            app:cardElevation="4dp"
-
-            app:cardCornerRadius="5dp">
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <ImageView
-                    android:id="@+id/settingIcon"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:src="@drawable/setting"
-                    android:layout_centerInParent="true"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="15sp"
-                    android:layout_below="@id/settingIcon"
-                    android:layout_centerHorizontal="true"
-                    android:text="Settings"/>
-            </RelativeLayout>
+            <ImageView
+                android:id="@+id/settingIcon"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/setting" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:layout_below="@id/settingIcon"
+                android:layout_centerHorizontal="true"
+                android:text="Settings"/>
+        </RelativeLayout>
 
         </androidx.cardview.widget.CardView>
 

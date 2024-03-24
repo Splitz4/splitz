@@ -13,5 +13,6 @@
     <color name="snackbar_error_color">#F72400</color>
     <color name="snackbar_succes_color">#83FB1B</color>
     <color name="primary_text_color">#363A43</color>
+    <color name="deaultTheme">#CD4EF1</color>
 </resources>
 

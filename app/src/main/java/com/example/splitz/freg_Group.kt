@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import com.airbnb.lottie.LottieAnimationView
@@ -58,9 +59,37 @@ class freg_Group : Fragment() {
         val view = inflater.inflate(R.layout.fragment_freg__group, container, false)
         chart = view?.findViewById(R.id.pieGraph)
         noGraphText = view.findViewById<LottieAnimationView>(R.id.noGraphText)
+        val settingsCard = view.findViewById<CardView>(R.id.settingsCard)
+        val backTraceAnalysis = view.findViewById<ImageView>(R.id.backTraceAnalysis)
+        val transactionsCard = view.findViewById<CardView>(R.id.transactionsCard)
 
         // Call getTransaction to fetch data from Firestore
         getTransaction()
+
+        transactionsCard.setOnClickListener {
+            val secondFragment = transactionList()
+            activity?.supportFragmentManager?.beginTransaction()?.apply {
+                replace(R.id.frameLayout, secondFragment)
+                addToBackStack(null) // Optional, adds the transaction to the back stack
+                commit()
+            }
+        }
+        settingsCard.setOnClickListener {
+            val secondFragment = setting_Freg()
+            activity?.supportFragmentManager?.beginTransaction()?.apply {
+                replace(R.id.frameLayout, secondFragment)
+                addToBackStack(null) // Optional, adds the transaction to the back stack
+                commit()
+            }
+        }
+
+        backTraceAnalysis.setOnClickListener {
+            if (childFragmentManager.backStackEntryCount > 0) {
+                childFragmentManager.popBackStack()
+            } else {
+                activity?.onBackPressed()
+            }
+        }
 
         return view
     }

@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -78,6 +79,7 @@ class addFriends : Fragment(),  progresBars{
         val view = inflater.inflate(R.layout.fragment_add_friends, container, false)
         val buttonContact = view.findViewById<CardView>(R.id.buttonContact)
         noFriendsText = view.findViewById(R.id.noFriendsText)
+        val backTraceAddFrd = view.findViewById<ImageView>(R.id.backTraceAddFrd)
 
 
 
@@ -95,7 +97,13 @@ class addFriends : Fragment(),  progresBars{
 
         }
 
-
+        backTraceAddFrd.setOnClickListener {
+            if (childFragmentManager.backStackEntryCount > 0) {
+                childFragmentManager.popBackStack()
+            } else {
+                activity?.onBackPressed()
+            }
+        }
         return view
 
     }

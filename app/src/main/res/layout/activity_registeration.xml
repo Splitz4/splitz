@@ -1,122 +1,197 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#092635"
-    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".registeration">
 
-<!--    android:fontFamily="@font/cherry_swash_bold"-->
+
+
+    <view class="android.widget.ImageView"
+        android:id="@+id/registerImageView"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="#CD4EF1"
+        />
     <TextView
         android:id="@+id/tv_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="50dp"
         android:layout_marginBottom="5dp"
-
-        android:text="@string/register"
-        android:textAlignment="center"
-        android:textColor="#9EC8B9"
+        android:textStyle="bold"
+        android:text="Register"
+        android:layout_centerHorizontal="true"
+        android:textColor="#fff"
         android:textSize="40sp" />
-
     <TextView
         android:id="@+id/tv_subtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
         android:layout_marginBottom="50dp"
+        android:layout_below="@+id/tv_logo"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"
         android:text="@string/tag"
-        android:textColor="#9EC8B9"
+        android:textColor="#fff"
         android:textSize="17sp" />
 
-    <EditText
-        android:id="@+id/et_name"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/et_custom"
-        android:hint="@string/your_name"
-        android:inputType="textPersonName"
-        android:padding="15dp"
-        android:textSize="15sp" />
 
-    <EditText
-        android:id="@+id/et_email"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/et_custom"
-        android:hint="@string/e_mail"
-        android:inputType="textEmailAddress"
-        android:padding="15dp"
-        android:textSize="15sp" />
+    <ImageView
+        android:id="@+id/imageViewRegister"
+        android:layout_width="500dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/register_image"
+        android:scaleType="fitXY"
+        android:layout_below="@+id/registerImageView"
+        />
 
-    <EditText
-        android:id="@+id/etoPassword"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/et_nameLayout"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/et_custom"
-        android:hint="@string/password"
-        android:inputType="textPassword"
-        android:padding="15dp"
-        android:textSize="15sp" />
+        android:layout_height="60dp"
+        android:layout_below="@+id/imageViewRegister"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        app:hintTextColor="#CD4EF1"
+        app:boxStrokeColor="#CD4EF1"
 
-    <EditText
-        android:id="@+id/etRepassword"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:background="@drawable/et_custom"
-        android:hint="@string/re_type_password"
-        android:inputType="textPassword"
-        android:padding="15dp"
-        android:textSize="15sp" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        tools:context=".registeration"
         >
-
-        <Button
-            android:id="@+id/btn_register"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="30dp"
-            android:background="@drawable/btn_custom"
-            android:text="@string/register"
-            android:textColor="@android:color/white" />
+            style="@style/description_Pop"
+            android:hint="Enter Your Name"
+            android:inputType="textPersonName"
+            android:drawableStart="@drawable/outline_person_24"
+            >
 
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_above="@id/swipeLeft"
-            android:layout_centerHorizontal="true"
-            android:src="@drawable/ic_arrow_left" />
+        </com.google.android.material.textfield.TextInputEditText>
 
-        <TextView
-            android:id="@+id/swipeLeft"
-            android:layout_width="wrap_content"
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/et_emailLayout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@+id/et_nameLayout"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        app:hintTextColor="#CD4EF1"
+        app:boxStrokeColor="#CD4EF1"
+
+        >
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_email"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="20dp"
-            android:text="@string/swipe_right_for_login"
-            android:textColor="#9EC8B9"
-            android:textSize="15sp" />
-    </RelativeLayout>
-</LinearLayout>
+            style="@style/description_Pop"
+            android:hint="Enter Your Email Address"
+            android:inputType="textEmailAddress"
+            android:drawableStart="@drawable/email_icon"
+            >
+
+        </com.google.android.material.textfield.TextInputEditText>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/etoPhnLayout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@+id/et_emailLayout"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        app:hintTextColor="#CD4EF1"
+        app:boxStrokeColor="#CD4EF1"
+
+        >
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etoPhn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/description_Pop"
+            android:hint="Enter Your Phone Number"
+            android:inputType="phone"
+            android:drawableStart="@drawable/phone_icon"
+            >
+
+        </com.google.android.material.textfield.TextInputEditText>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/etoPasswordLayout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@+id/etoPhnLayout"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        app:hintTextColor="#CD4EF1"
+        app:boxStrokeColor="#CD4EF1"
+
+        >
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etoPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/description_Pop"
+            android:hint="Enter Your Password"
+            android:inputType="textPassword"
+            android:drawableStart="@drawable/password_icon"
+            >
+
+        </com.google.android.material.textfield.TextInputEditText>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/btn_register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etoPasswordLayout"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="15dp"
+        android:backgroundTint="#CD4EF1"
+        app:cardCornerRadius="5dp"
+        android:elevation="10dp"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="@string/register"
+                android:textColor="#fff"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/registerLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Login With Your Account"
+        android:textSize="15sp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="15dp"
+        />
+
+</RelativeLayout>

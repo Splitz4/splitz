@@ -82,7 +82,7 @@ class friendsAdapter(private val friendsList : ArrayList<friendsData>, private v
                 val timestamp = dateFormat.format(currentTime)
                 val parsedDateTime = dateFormat.parse(timestamp)
                 val date = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(parsedDateTime)
-                val time = SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(parsedDateTime)
+                val time = SimpleDateFormat("HH:mma", Locale.getDefault()).format(parsedDateTime)
 
                 val savedUsername = getUsername()
                 if (savedUsername != null) {

@@ -6,12 +6,9 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.ContentValues.TAG
 import android.content.Context
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -20,32 +17,20 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.cardview.widget.CardView
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.airbnb.lottie.Lottie
 import com.airbnb.lottie.LottieAnimationView
 import com.example.splitz.login.Companion.KEY_USERNAME
 import com.example.splitz.login.Companion.PREFS_NAME
 
 
-import com.google.firebase.firestore.DocumentChange
-import com.google.firebase.firestore.EventListener
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.FirebaseFirestoreException
-import com.google.firebase.firestore.QuerySnapshot
-import com.google.firebase.firestore.auth.User
-import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -93,6 +78,7 @@ class home_Freg : Fragment(), progresBar {
         val incomeBtn = view.findViewById<CardView>(R.id.cardReqIcon)
         val splitzBtn = view.findViewById<CardView>(R.id.splitzIcon)
         val totalBalance = view.findViewById<TextView>(R.id.addExpText)
+        val seeAllText = view.findViewById<TextView>(R.id.seeAllText)
         emptyText = view.findViewById(R.id.noExpText)
 
         userRecyclerView = view.findViewById(R.id.recycler_viewTransactions)
@@ -103,6 +89,16 @@ class home_Freg : Fragment(), progresBar {
 
         transactionList = arrayListOf<transactionsData>()
         getTransactionData()
+
+            seeAllText.setOnClickListener {
+                val secondFragment = transactionList()
+                activity?.supportFragmentManager?.beginTransaction()?.apply {
+                    //alertDialog.dismiss()
+                    replace(R.id.frameLayout, secondFragment)
+                    addToBackStack(null) // Optional, adds the transaction to the back stack
+                    commit()
+                }
+            }
 
 
         val savedUsername = getUsername()
@@ -219,12 +215,13 @@ class home_Freg : Fragment(), progresBar {
             var expAmou = expAmou.text.toString().toDouble()
             val savedUsername = getUsername()
             val currentTime = Calendar.getInstance().time
-            val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+            val dateFormat = SimpleDateFormat("dd-MM-yy HH:mma", Locale.getDefault())
             val timestamp = dateFormat.format(currentTime)
             val parsedDateTime = dateFormat.parse(timestamp)
-            val date = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(parsedDateTime)
-            val time = SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(parsedDateTime)
+            val date = SimpleDateFormat("dd-MM-yy", Locale.getDefault()).format(parsedDateTime)
+            val time = SimpleDateFormat("HH:mma", Locale.getDefault()).format(parsedDateTime)
 
+           // Toast.makeText(requireContext(), time, Toast.LENGTH_LONG).show()
             if (savedUsername != null) {
                 val Transaction = hashMapOf(
                     "Description" to expDescVal,
@@ -283,11 +280,11 @@ class home_Freg : Fragment(), progresBar {
             var expAmou = incomeAmou.text.toString()
             val savedUsername = getUsername()
             val currentTime = Calendar.getInstance().time
-            val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+            val dateFormat = SimpleDateFormat("dd-MM-yy HH:mma", Locale.getDefault())
             val timestamp = dateFormat.format(currentTime)
             val parsedDateTime = dateFormat.parse(timestamp)
-            val date = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(parsedDateTime)
-            val time = SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(parsedDateTime)
+            val date = SimpleDateFormat("dd-MM-yy", Locale.getDefault()).format(parsedDateTime)
+            val time = SimpleDateFormat("HH:mma", Locale.getDefault()).format(parsedDateTime)
             if (savedUsername != null) {
                 val Transaction = hashMapOf(
                     "Description" to expDescVal,

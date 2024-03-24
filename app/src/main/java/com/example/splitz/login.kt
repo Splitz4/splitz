@@ -8,11 +8,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
+import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
+import androidx.cardview.widget.CardView
 import androidx.constraintlayout.motion.widget.TransitionBuilder.validate
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -25,6 +28,9 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.auth.User
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 
 class login : BaseActivity() {
 
@@ -48,9 +54,19 @@ class login : BaseActivity() {
         auth = FirebaseAuth.getInstance()
         email = findViewById(R.id.etl_email)
         pass = findViewById(R.id.etl_password)
+        var registerBtn = findViewById<TextView>(R.id.loginRegister)
+        var forgotBtn = findViewById<TextView>(R.id.forgotPassword)
 
-        val btnlogin = findViewById<Button>(R.id.btn_login)
-        val logingoogle = findViewById<Button>(R.id.login_google)
+        registerBtn.setOnClickListener {
+            val intent = Intent(this@login, registeration::class.java)
+            startActivity(intent)
+        }
+        forgotBtn.setOnClickListener {
+            forgotPasswordPopUp()
+        }
+
+        val btnlogin = findViewById<CardView>(R.id.btn_login)
+        val logingoogle = findViewById<CardView>(R.id.login_google)
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
@@ -74,6 +90,51 @@ class login : BaseActivity() {
 
 
     }
+
+    private fun forgotPasswordPopUp() {
+        val dialogView =
+            LayoutInflater.from(this).inflate(R.layout.forgot_password, null)
+        var forgotPasswordEmail = dialogView.findViewById<EditText>(R.id.forgotPasswordEmailEdit)
+
+        val alertDialogBuilder = AlertDialog.Builder(this)
+            .setView(dialogView)
+            .setTitle("Reset Password")
+            .setCancelable(false)
+
+        val alertDialog = alertDialogBuilder.create()
+
+
+        val submitButton = dialogView.findViewById<CardView>(R.id.btn_forgotPassword)
+        val cancelButton = dialogView.findViewById<CardView>(R.id.btn_Cancel)
+
+        submitButton.setOnClickListener {
+            showProgressDialog(resources.getString(R.string.please_click_back_again_to_exit))
+            var emailAddress = forgotPasswordEmail.text.toString()
+            auth.sendPasswordResetEmail(emailAddress)
+                .addOnSuccessListener {
+
+                   // Toast.makeText(this, "Please check you email", Toast.LENGTH_LONG).show()
+                    hideProgressDialog()
+                    alertDialog.dismiss()
+                    showErrorSnackBar("Please check you email")
+
+
+                }.addOnFailureListener{
+                    hideProgressDialog()
+                    alertDialog.dismiss()
+                    showErrorSnackBar(it.toString())
+                }
+
+        }
+        cancelButton.setOnClickListener {
+            alertDialog.dismiss()
+        }
+
+        // Show the dialog
+        alertDialog.show()
+    }
+
+
 
     private fun signIn() {
         val etEmail: String = email?.text.toString().trim { it <= ' ' }

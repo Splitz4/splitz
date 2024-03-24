@@ -24,7 +24,6 @@ class start_act : BaseActivity() {
             hideProgressDialog()
             val intent = Intent(this, Home::class.java)
             startActivity(intent)
-            finish()
         }
         else{
             hideProgressDialog()
@@ -33,12 +32,10 @@ class start_act : BaseActivity() {
             loginButtonCard.setOnClickListener {
                 val intent = Intent(this, login::class.java)
                 startActivity(intent)
-                finish()
             }
         registerButtonCard.setOnClickListener {
             val intent = Intent(this, registeration::class.java)
             startActivity(intent)
-            finish()
         }
         }
 

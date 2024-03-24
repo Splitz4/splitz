@@ -14,6 +14,9 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.RatingBar
 import android.widget.Switch
 import android.widget.TextView
 import android.widget.Toast
@@ -22,6 +25,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SwitchCompat
+import androidx.cardview.widget.CardView
 import androidx.core.app.ActivityCompat.recreate
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
@@ -69,11 +73,41 @@ class setting_Freg : Fragment(){
         val logoutApp = view.findViewById<TextView>(R.id.logoutApp)
         val editProfile = view.findViewById<TextView>(R.id.buttonEditProfile)
         val ourTeam = view.findViewById<TextView>(R.id.ourTeam)
+        val RateUs = view.findViewById<TextView>(R.id.RateUs)
+        val backTraceSeting = view.findViewById<ImageView>(R.id.backTraceSeting)
 
         val auth = FirebaseAuth.getInstance()
 
         editProfile.setOnClickListener {
             showPopupProfile()
+        }
+        backTraceSeting.setOnClickListener {
+            if (childFragmentManager.backStackEntryCount > 0) {
+                childFragmentManager.popBackStack()
+            } else {
+                activity?.onBackPressed()
+            }
+        }
+
+        RateUs.setOnClickListener {
+            val dialogView =
+                LayoutInflater.from(requireContext()).inflate(R.layout.rateuspop, null)
+            val rateStar = dialogView.findViewById<RatingBar>(R.id.ratingStar)
+
+            val submitRate = dialogView.findViewById<CardView>(R.id.submitRateUs)
+
+            val alertDialogBuilder = AlertDialog.Builder(requireContext())
+                .setView(dialogView)
+                .setCancelable(false)
+
+            val alertDialog = alertDialogBuilder.create()
+
+            submitRate.setOnClickListener {
+                alertDialog.dismiss()
+            }
+
+
+            alertDialog.show()
         }
         ourTeam.setOnClickListener {
             val secondFragment = outTeam()
@@ -123,7 +157,13 @@ class setting_Freg : Fragment(){
             dialog.dismiss()
         }
         builder.setNegativeButton("View") { dialog, _ ->
-            dialog.dismiss()
+            val secondFragment = profile()
+            activity?.supportFragmentManager?.beginTransaction()?.apply {
+                dialog.dismiss()
+                replace(R.id.frameLayout, secondFragment)
+                addToBackStack(null) // Optional, adds the transaction to the back stack
+                commit()
+            }
         }
         val dialog = builder.create()
         dialog.show()

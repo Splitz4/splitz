@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class transactionAdapter(private val transactionList : ArrayList<transactionsData>) :
+class transactionAdapter(private val transactionList: ArrayList<transactionsData>) :
     RecyclerView.Adapter<transactionAdapter.MyViewHolder>(){
 
 

@@ -28,8 +28,14 @@ class registeration : BaseActivity() {
         var et_email = binding.etEmail
         var btn_register = binding.btnRegister
         var et_password = binding.etoPassword
-        var et_repassword = binding.etRepassword
+        var et_repassword = binding.etoPhn
         var et_name = binding.etName
+
+        binding.registerLogin.setOnClickListener {
+           val intent = Intent(this@registeration, login::class.java)
+            startActivity(intent)
+            finish()
+        }
 
         et_email.addTextChangedListener(object:TextWatcher{
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -58,10 +64,10 @@ class registeration : BaseActivity() {
             val email = et_email.text.toString()
             val name = et_name.text.toString()
             val pass =  et_password.text.toString()
-            val et_repassword = et_repassword.text.toString()
+            val etoPhone = et_repassword.text.toString()
 
-            if(name.isNotEmpty() && email.isNotEmpty() && pass.isNotEmpty() && et_repassword.isNotEmpty()){
-                if (pass == et_repassword){
+            if(name.isNotEmpty() && email.isNotEmpty() && pass.isNotEmpty() && etoPhone.isNotEmpty()){
+
 
                     firebaseAuth.createUserWithEmailAndPassword(email,pass).addOnCompleteListener {
                         if (it.isSuccessful){
@@ -73,7 +79,8 @@ class registeration : BaseActivity() {
                                     val User = hashMapOf(
                                         "Name" to name,
                                         "Email" to email,
-                                        "Password" to pass
+                                        "Password" to pass,
+                                        "Phone" to etoPhone
                                     )
 
                                     db.collection("User")
@@ -81,21 +88,21 @@ class registeration : BaseActivity() {
                                         .addOnSuccessListener {
                                             val intent =  Intent(this@registeration, login::class.java)
                                             startActivity(intent)
+                                            finish()
                                         }
                         }
                         }
 
                         else{
+                            hideProgressDialog()
                                // Toast.makeText(this, it.exception.toString(),Toast.LENGTH_LONG).show()
                             showErrorSnackBar(it.exception.toString())
                         }
                     }
 
-                }else{
-                    //Toast.makeText(this,"", Toast.LENGTH_LONG).show()
-                    showErrorSnackBar("Both Password is not matching")
-                }
+
             }else{
+                hideProgressDialog()
                 showErrorSnackBar("Empty fields can not be submitted")
 
             }

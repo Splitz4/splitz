@@ -30,6 +30,15 @@
             android:scaleType="center"
             android:src="@drawable/wave" />
 
+        <ImageView
+            android:id="@+id/backTraceAddFrd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_arrow_back_white_24"
+            android:layout_marginTop="35dp"
+            android:layout_marginStart="20dp"
+            />
+
         <TextView
             android:id="@+id/addFriendsHead"
             android:layout_width="wrap_content"

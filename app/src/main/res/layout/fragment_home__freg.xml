@@ -182,9 +182,21 @@
             android:layout_below="@+id/cardSendIcon"
             android:layout_marginStart="20dp"
             android:layout_marginTop="120dp"
-            android:text="Expenses"
+            android:text="Transactions"
             android:textStyle="bold"
             android:textSize="20sp" />
+        <TextView
+            android:id="@+id/seeAllText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/cardSendIcon"
+            android:layout_marginEnd="20dp"
+            android:layout_alignRight="@+id/expenseList"
+            android:layout_marginTop="123dp"
+            android:layout_alignParentEnd="true"
+            android:text="Show All"
+            android:textStyle="bold"
+            android:textSize="15sp" />
 
 
         <com.airbnb.lottie.LottieAnimationView
